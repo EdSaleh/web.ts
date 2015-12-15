@@ -1,28 +1,34 @@
 ﻿/*** Pages ***/
 window.onload = function (e) {
     switch (window.location.href.substr(window.location.href.lastIndexOf("#") + 1)) {
-        //Change
+        //************Change********************
         case "/Page1": default:
+		//Page1 class for /Page1 Page or home Page 
             class Page1 extends web.ts.Page {
                 //public Renderer: Function;
+				//Input the page name or element# of the template
                 protected View(): string {
-                    return "/Page1.txt";
+                    return "/Page1.txt";//The location of the template page
                 }
+				//Render Content callback
                 protected Render(doc: Document) {
-                    var elm = document.getElementById("content");
+                    var elm = document.getElementById("content");//Place to reneder the content into
                     elm.textContent = "";
                     elm.appendChild(doc.querySelector("*"));
                 };
-                protected Wait() {
+                protected Wait() {//Wait Panel
                     var waitDiv = document.createElement("div"); return waitDiv;
                 }
             }
-            (new Page1()).Load(); break;
+            (new Page1()).Load();//Create Page Object and ask to Load() it. 
+			//Load() will use abstract methods View() and Render() to get a specific page template form a location to the Render()
+			break;
         case "example":
+		//get Template from an element on Page(web ts css class makes the element hidden)
             class example extends web.ts.Page {
                 //public Renderer: Function;
                 protected View(): string {
-                    return "#example";
+                    return "#example";//(get element with id #)
                 }
                 protected Render(doc: Document) {
                     var container = document.getElementById("content");
@@ -34,8 +40,10 @@ window.onload = function (e) {
                 }
             }
             (new example()).Load(); break;
+		//************End Change*******************
     }
 }
+
 window.onhashchange = window.onload;
 //Hide Templates
 var style = document.createElement('style');
@@ -45,8 +53,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 /*** Library ***/
 module web.ts {
     export abstract class Page {
-        protected abstract View(): string;
-        protected abstract Render(doc: Document): void;
+        protected abstract View(): string;//Contains the page location or elements# to get template from
+        protected abstract Render(doc: Document): void;//Callback when the template is downloaded and sent for user to render as desired.
         protected abstract Wait(): void;
         public Load() {
             this.Wait();

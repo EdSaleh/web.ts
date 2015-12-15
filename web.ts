@@ -5,7 +5,6 @@ window.onload = function (e) {
         case "/Page1": default:
 		//Page1 class for /Page1 Page or home Page 
             class Page1 extends web.ts.Page {
-                //public Renderer: Function;
 				//Input the page name or element# of the template
                 protected View(): string {
                     return "/Page1.txt";//The location of the template page
@@ -38,6 +37,12 @@ window.onload = function (e) {
                 protected Wait() {
                     var waitDiv = document.createElement("div");
                 }
+            }
+            class list extends web.ts.List<string>{
+                public Add(s:string) { }
+                public Remove(i: number) { }
+                protected Wait() { }
+                protected View(): string { return ""}
             }
             (new example()).Load(); break;
 		//************End Change*******************
@@ -74,15 +79,12 @@ module web.ts {
     }
     export abstract class List<T> extends Page {
         private Doc: Document;
-        abstract Item(doc: Document, item: T)
-        public Add(item:T) {
-            this.Item(this.Doc, item);
-        }
-        abstract Remove();
-        Render(Doc: Document) {
+        abstract Add(item: T, i?: number, doc?:Document):void;
+        abstract Remove(i:number):void;
+        protected Render(Doc: Document) {
             this.Doc = Doc;
         }
-        List(items: T[]) {
+        public List(items: T[]):void {
             this.Load();
             for (var item in items) {
                 this.Add(item);

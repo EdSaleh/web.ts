@@ -91,7 +91,7 @@ module web.ts {
             }
         }
     }
-	export function get(url: string, callback:Function,timeout:number=4000,timeoutcallback:Function=null, type:string="GET", async:boolean=true):void{ 
+    export function get(url: string, callback: Function, timeout: number = 4000, timeoutcallback: Function = () => { }, type:string="GET", async:boolean=true):void{ 
 	                var xhttp = new XMLHttpRequest();
                     xhttp.onload = callback();
 					xhttp.timeout = timeout;

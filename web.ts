@@ -91,5 +91,13 @@ module web.ts {
             }
         }
     }
+	export function get(url: string, callback:Function,timeout:number=4000,timeoutcallback:Function=null, type:string="GET", async:boolean=true):void{ 
+	                var xhttp = new XMLHttpRequest();
+                    xhttp.onload = callback();
+					xhttp.timeout = timeout;
+					xhttp.ontimeout=timeoutcallback(); 
+                    xhttp.open(type, url, async);
+                    xhttp.send();
+	}
     export function documentify(obj: Object): Document { return new DOMParser().parseFromString(JSON.stringify(obj), "text/xml"); }
 }

@@ -1,28 +1,26 @@
-﻿/*** Pages ***/
+﻿//Code
+var extraTitle = " - Richmond Hill Veterinary House Call Services";
+
+//Web.ts
 window.onload = function (e) {
+    web.ts.beforeLoad();
     switch (window.location.href.substr(window.location.href.lastIndexOf("#") + 1)) {
-        //************Change********************
-        case "/Page1": default:
-		//Page1 class for /Page1 Page or home Page 
-            class Page1 extends web.ts.Page {
-				//Input the page name or element# of the template
+//change for pages
+        case "/": default:
+            class Index extends web.ts.Page {
+            //view page for action
                 protected View(): string {
-                    return "/Page1.txt";//The location of the template page
+                    return "/Page1.txt";
                 }
-				//Render Content callback
+                //how to render document method
                 protected Render(doc: Document) {
-                    var elm = document.getElementById("content");//Place to reneder the content into
-                    elm.textContent = "";
-                    elm.appendChild(doc.querySelector("*"));
+                    document.title = "Page1";
+                    document.getElementById("content").innerHTML = doc.body.innerHTML;
                 };
-                protected Wait() {//Wait Panel
-                    var waitDiv = document.createElement("div"); return waitDiv;
-                }
             }
-            (new Page1()).Load();//Create Page Object and ask to Load() it. 
-			//Load() will use abstract methods View() and Render() to get a specific page template form a location to the Render()
-			break;
-        case "example":
+            (new Index()).Load();
+            break;
+		case "example":
 		//get Template from an element on Page(web ts css class makes the element hidden)
             class example extends web.ts.Page {
                 //public Renderer: Function;
@@ -30,25 +28,27 @@ window.onload = function (e) {
                     return "#example";//(get element with id #)
                 }
                 protected Render(doc: Document) {
-                    var container = document.getElementById("content");
+					/*
+					//List Example
+						class list extends web.ts.List<string>{
+							public Add(s:string) { }
+							public Remove(i: number) { }
+							protected Wait() { }
+							protected View(): string { return ""}
+						}
+						var arr[];
+						list.List(arr);
+					*/
+					var container = document.getElementById("content");
                     container.textContent = "";
                     container.appendChild(doc.querySelector("*"))
                 };
-                protected Wait() {
-                    var waitDiv = document.createElement("div");
-                }
-            }
-            class list extends web.ts.List<string>{
-                public Add(s:string) { }
-                public Remove(i: number) { }
-                protected Wait() { }
-                protected View(): string { return ""}
             }
             (new example()).Load(); break;
 		//************End Change*******************
     }
+    web.ts.afterLoad();
 }
-
 window.onhashchange = window.onload;
 //Hide Templates
 var style = document.createElement('style');
@@ -60,19 +60,19 @@ module web.ts {
     export abstract class Page {
         protected abstract View(): string;//Contains the page location or elements# to get template from
         protected abstract Render(doc: Document): void;//Callback when the template is downloaded and sent for user to render as desired.
-        protected abstract Wait(): void;
+        protected Wait() {  web.ts.wait();}
         public Load() {
             this.Wait();
-            if (this.View() != null && this.View().length > 1) {
+           if (this.View() != null && this.View().length > 1) {
                 if (this.View()[0] != "#") {
                     var xhttp = new XMLHttpRequest();
-                    xhttp.onload = () => this.Render(<Document>new DOMParser().parseFromString(xhttp.responseText, "text/xml"));
+                    xhttp.onload = () => this.Render(<Document>(new DOMParser().parseFromString(xhttp.responseText.replace(/(class( *)=["'][ \-\w]*web ts[ \-\w]*["'])?/gi, xhttp.responseText.match(/(class( *)=["'][ \-\w]*web ts[ \-\w]*["'])?/gi)[0].replace(" ts", "")), "text/html")));
                     xhttp.open("GET", this.View(), true);
                     xhttp.send();
                 } else {
                     var elm: HTMLElement = document.getElementById(this.View().substr(1));
-                    elm.className.replace("web ts", ""); 
-                    this.Render(<Document>new DOMParser().parseFromString(elm.outerHTML, "text/xml"));
+                    elm.className.replace("ts", ""); 
+                    this.Render(<Document>new DOMParser().parseFromString(elm.outerHTML, "text/html"));
                 }
             }
         }
@@ -100,4 +100,14 @@ module web.ts {
                     xhttp.send();
 	}
     export function documentify(obj: Object): Document { return new DOMParser().parseFromString(JSON.stringify(obj), "text/xml"); }
+    export var wait: Function = function () {
+        //can change this
+        var waitDiv = document.createElement("div"); waitDiv.setAttribute("style", "width:100%; height:250px; background:url(/Images/spinner.gif) no-repeat; background-position:center;"); document.getElementById("content").innerHTML = waitDiv.outerHTML;
+    }
+    export var beforeLoad: Function = function () {
+        var elms = document.querySelectorAll("nav ul li");
+        for (var i = 0; i < elms.length; i++) (<HTMLElement>elms[i]).classList.remove("active");
+        web.ts.wait = function () { };    //override wait
+    }
+    export var afterLoad: Function = function () { }
 }

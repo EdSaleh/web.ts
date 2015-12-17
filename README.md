@@ -9,6 +9,6 @@ You can also return #element (id of an element), which returns the outerHTML con
 
 Third, you implement the Render(document) method callback which is used to render the content when it's already available.
 
-Forth, create instance of this class and cal Load() method to ask to fethch the document in View() and Render(doc) when it's finished fetching.
+Fourth, create instance of this class and cal Load() method to ask to fethch the document in View() and Render(doc) when it's finished fetching.
 
 Fifth, Pages are loaded when a Url change is detected and load a different page based on the name of the Hash. 

@@ -6,6 +6,7 @@ An Easier, Faster, and Efficient way to create websites.
 
 * For lists, create a ts class that extends web.ts.List<T>.  You fetch a document and populate (Add() each item individually) items using the template document render them by implement View(), Add(), Remove() methods in class and start process using instance.List(arr:T).
 
+* Use switch(hash) cases of main() method in web.ts to load/List a specific Page or List object on a specific hash name. Hash links with "web" css class will continue to work even if "onhashchange" event isn't supported as pages will reload automatically when this happens.
 
 ##Pages
 1. Implement the View() Method to return the location of the view page you would like to show, for example, "/Page1.txt".

@@ -52,6 +52,15 @@ module web.ts {
                             var arr[];
                             list.List(arr);
                         */
+                                                /*
+                        //View Example
+                            class list extends web.ts.View<string>{
+                                public Apply(s:string, doc:?Document) { }
+                                protected View(): string { return ""}
+                            }
+                            var arr[];
+                            list.List(arr);
+                        */
                         document.title = "Example";
                         document.getElementById("content").innerHTML = doc.body.innerHTML;
                     };

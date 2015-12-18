@@ -18,7 +18,7 @@ module web.ts {
                         document.getElementById("content").innerHTML = doc.body.innerHTML;
                     };
                 }
-                (new Index()).Load();
+                (new Index());
                 break;
             case "Page2":
                 class Page2 extends web.ts.Page {
@@ -32,7 +32,7 @@ module web.ts {
                         document.getElementById("content").innerHTML = doc.body.innerHTML;
                     };
                 }
-                (new Page2()).Load();
+                (new Page2());
                 break;
             case "example":
                 //get Template from an element on Page(web ts css class makes the element hidden)

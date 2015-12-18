@@ -1,0 +1,6 @@
+﻿<!-- Template for Page-->
+<div>
+    <img alt="" src="" />
+    <div>hello2</div>
+    <input id="Button1" type="button" value="button" />
+</div>

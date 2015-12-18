@@ -1,16 +1,12 @@
 ﻿//Web.ts
 module web.ts {
-    export var wait: Function = function () {
-        //can change this
-        var waitDiv = document.createElement("div"); waitDiv.setAttribute("style", "width:100%; height:250px; background:url(/Images/spinner.gif) no-repeat; background-position:center;"); document.getElementById("content").innerHTML = waitDiv.outerHTML;
-    }
-
-    export function main(e): void {
-        /* code  */
-        web.ts.wait = function () { };  
+    function main(e): void {
+        /* 
+            code
+         */
+        //code for pages
         switch (window.location.href.substr(window.location.href.lastIndexOf("#") + 1)) {
-            /*code for pages*/
-            case "/": default:
+            case "": default:
                 class Index extends web.ts.Page {
                     //view page for action
                     protected View(): string {
@@ -23,6 +19,20 @@ module web.ts {
                     };
                 }
                 (new Index()).Load();
+                break;
+            case "Page2":
+                class Page2 extends web.ts.Page {
+                    //view page for action
+                    protected View(): string {
+                        return "/Page2.txt";
+                    }
+                    //how to render document method
+                    protected Render(doc: Document) {
+                        document.title = "Page2";
+                        document.getElementById("content").innerHTML = doc.body.innerHTML;
+                    };
+                }
+                (new Page2()).Load();
                 break;
             case "example":
                 //get Template from an element on Page(web ts css class makes the element hidden)
@@ -53,56 +63,72 @@ module web.ts {
             code
         */
     }
-    window.onhashchange = window.onload;
+    //Assign main() to Events
+    window.onload = function () {
+        main(null);
+        if ("onhashchange" in window) {
+            onhashchange = main;
+        } else {
+        //If not supported
+            var elms = document.getElementsByTagName("a");
+            for (var i = 0; i < elms.length; i++)
+                if ((<HTMLAnchorElement>elms[i]).classList.contains("web")) {
+                    (<HTMLAnchorElement>elms[i]).onclick = function () {
+                        window.location.reload();
+                    }
+            }
+        }
+    }
     //Hide Templates
     var style = document.createElement('style');
     style.type = 'text/css';
     style.innerHTML = '.web.ts { display: none; }';
     document.getElementsByTagName('head')[0].appendChild(style);
-/*** Library ***/
+    /*** Library ***/
     export abstract class Page {
-        private TextToDocument(text: string): Document {
-            return <Document>(new DOMParser().parseFromString(text.replace(/(class( *)=["'][ \-\w]*web ts[ \-\w]*["'])?/gi, text.match(/(class( *)=["'][ \-\w]*web ts[ \-\w]*["'])?/gi)[0].replace(" ts", "")), "text/html"))
-        }
-        protected abstract View(): string;//Contains the page location or elements# to get template from
+        protected abstract View(): string;//Contains the page location or elements# to get template from and what to do while loading is taking place
         protected abstract Render(doc: Document): void;//Callback when the template is downloaded and sent for user to render as desired.
-        protected Wait() {  web.ts.wait();}
+        //Loading Function
         public Load() {
-           this.Wait();
-           if (this.View() != null && this.View().length > 1) {
-                if (this.View()[0] != "#") {
+            var view: string = this.View();
+            if (view != null && view.length > 1) {
+                if (view[0] != "#") {
                     var xhttp = new XMLHttpRequest();
                     xhttp.onload = () => this.Render(this.TextToDocument(xhttp.responseText));
-                    xhttp.open("GET", this.View(), true);
+                    xhttp.open("GET", view, true);
                     xhttp.send();
                 } else {
-                    this.Render(this.TextToDocument(document.getElementById(this.View().substr(1)).outerHTML));
+                    this.Render(this.TextToDocument(document.getElementById(view.substr(1)).outerHTML));
                 }
-           }
+            }
+        }
+        private TextToDocument(text: string): Document {
+            return <Document>(new DOMParser().parseFromString(text.replace(/(class( *)=["'][ \-\w]*web ts[ \-\w]*["'])?/gi, text.match(/(class( *)=["'][ \-\w]*web ts[ \-\w]*["'])?/gi)[0].replace(" ts", "")), "text/html"))
         }
     }
     export abstract class List<T> extends Page {
         private Doc: Document;
-        abstract Add(item: T, i?: number, doc?:Document):void;
-        abstract Remove(i:number):void;
+        //Add and Remove Items Template
+        abstract Add(item: T, i?: number, doc?: Document): void;
+        abstract Remove(i: number): void;
         protected Render(Doc: Document) {
             this.Doc = Doc;
         }
-        public List(items: T[]):void {
+        //Start List Item Function
+        public List(items: T[]): void {
             this.Load();
             for (var item in items) {
                 this.Add(item);
             }
         }
     }
-    export function get(url: string, callback: Function, timeout: number = 4000, timeoutcallback: Function = () => { }, type:string="GET", async:boolean=true):void{ 
-	                var xhttp = new XMLHttpRequest();
-                    xhttp.onload = callback();
-					xhttp.timeout = timeout;
-					xhttp.ontimeout=timeoutcallback(); 
-                    xhttp.open(type, url, async);
-                    xhttp.send();
-	}
+    export function get(url: string, callback: Function, timeout: number = 4000, timeoutcallback: Function = () => { }, type: string = "GET", async: boolean = true): void {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onload = callback();
+        xhttp.timeout = timeout;
+        xhttp.ontimeout = timeoutcallback();
+        xhttp.open(type, url, async);
+        xhttp.send();
+    }
     export function documentify(obj: Object): Document { return new DOMParser().parseFromString(JSON.stringify(obj), "text/xml"); }
 }
-window.onload = web.ts.main;

@@ -1,10 +1,10 @@
 #web.ts
 Create Web Apps the Object Oriented way.
-An Easier, faster, and efficient way to create websites. 
+An Easier, Faster, and Efficient way to create websites. 
 
-* For pages, you create a ts class file that extends web.ts.Page.
+* For pages, you create a ts class file that extends web.ts.Page. You fetch a document and populate them and then render them by overriding View() and Render() methods and start the process using instance.Load() method 
 
-* For lists, create a ts class that extends web.ts.List<T>. 
+* For lists, create a ts class that extends web.ts.List<T>.  You fetch a document and populate items using the template document render them by overrding View(). Add(), Remove() methods in class and start process using instance.List(arr:T).
 
 
 ##Pages
@@ -19,7 +19,7 @@ You can use the View() Method to prepare the document before View(), it will be 
 4. Pages are loaded when a Url change is detected and load a different page based on the name of the Hash. 
 
 ##List
-1. Implement the Add() and Remove() Method to be used in adding or removeing items. And implement View() method to return the document that will be used in rendering.
+1. Implement the Add() and Remove() Method to be used in adding or removing items. And implement View() method to return the document that will be used in rendering.
 List class uses Load() and Render() of the page extension internally and the methods, in addition to View() behave the same as Page class.
 
 2. Create an Instance of the class and call List(arr:T) to start the process.

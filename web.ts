@@ -17,8 +17,7 @@ module web.ts {
                         document.title = "Page1";
                         document.getElementById("content").innerHTML = doc.body.innerHTML;
                     };
-                }
-                (new Index());
+                }(new Index());
                 break;
             case "Page2":
                 class Page2 extends web.ts.Page {
@@ -31,8 +30,7 @@ module web.ts {
                         document.title = "Page2";
                         document.getElementById("content").innerHTML = doc.body.innerHTML;
                     };
-                }
-                (new Page2());
+                }(new Page2());
                 break;
             case "example":
                 //get Template from an element on Page(web ts css class makes the element hidden)
@@ -45,27 +43,27 @@ module web.ts {
                         /*
                         //List Example
                             class list extends web.ts.List<string>{
-                                public Add(s:string) { }
+                                public Add(item: T, i?: number, doc?: Document) {document.getElementById("content").innerText += item }
                                 public Remove(i: number) { }
-                                protected View(): string { return ""}
+                                protected View(): string { document.getElementById("content").innerText=""; return ""}
                             }
                             var arr[];
-                            list.List(arr);
+                            new list(arr);
                         */
                                                 /*
                         //View Example
-                            class list extends web.ts.View<string>{
-                                public Apply(s:string, doc:?Document) { }
-                                protected View(): string { return ""}
+                            class view extends web.ts.View<string>{
+                                public Apply(text:string, doc:?Document) {document.getElementById("content").innerText += text }
+                                protected View(): string { document.getElementById("content").innerText =""; return ""}
                             }
-                            var arr[];
-                            list.List(arr);
+                            new view("hello");
+
                         */
                         document.title = "Example";
                         document.getElementById("content").innerHTML = doc.body.innerHTML;
                     };
-                }
-                (new example()); break;
+                } (new example());
+                break;
             //************End Change*******************
         }
         /*

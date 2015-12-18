@@ -18,7 +18,7 @@ You can use the View() Method to prepare the document before View(), it will be 
 
 4. Pages are loaded when a Url change is detected and load a different page based on the name of the Hash. 
 
-##List
+##Lists
 1. Implement the Add() and Remove() Method to be used in adding or removing items. And implement View() method to return the document that will be used in rendering.
 List class uses Load() and Render() of the page extension internally and the methods, in addition to View() behave the same as Page class.
 

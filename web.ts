@@ -106,6 +106,22 @@ module web.ts {
             return <Document>(new DOMParser().parseFromString(text.replace(/(class( *)=["'][ \-\w]*web ts[ \-\w]*["'])?/gi, text.match(/(class( *)=["'][ \-\w]*web ts[ \-\w]*["'])?/gi)[0].replace(" ts", "")), "text/html"))
         }
     }
+    export abstract class View<T> extends Page {
+        private Doc: Document;
+        //Add and Remove Items Template
+        abstract Add(item: T, i?: number, doc?: Document): void;
+        abstract Remove(i: number): void;
+        protected Render(Doc: Document) {
+            this.Doc = Doc;
+        }
+        //Start List Item Function
+        public List(items: T[]): void {
+            this.Load();
+            for (var item in items) {
+                this.Add(item);
+            }
+        }
+    }
     export abstract class List<T> extends Page {
         private Doc: Document;
         //Add and Remove Items Template

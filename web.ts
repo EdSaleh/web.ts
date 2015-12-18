@@ -56,7 +56,7 @@ module web.ts {
                         document.getElementById("content").innerHTML = doc.body.innerHTML;
                     };
                 }
-                (new example()).Load(); break;
+                (new example()); break;
             //************End Change*******************
         }
         /*

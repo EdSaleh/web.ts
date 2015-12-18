@@ -123,9 +123,9 @@ module web.ts {
             super();
             this.item = item;
         }
-        private Doc: Document;
+        protected Doc: Document;
         //Add and Remove Items Template
-        public abstract Apply(item: T, Doc?: Document): void;
+        public Apply(item: T, Doc: Document = this.Doc): void { }
         protected Render(Doc: Document) {
             this.Doc = Doc;
             this.Apply(this.item);
@@ -137,10 +137,10 @@ module web.ts {
             super();
             this.List(items);
         }
-        private Doc: Document;
+        protected Doc: Document;
         //Add and Remove Items Template
-        abstract Add(item: T, i?: number, doc?: Document): void; 
-        abstract Remove(i: number): void;
+        public Add(item: T, i: number = null, doc: Document = this.Doc): void { }
+        public Remove(item: T, i: number = null, doc: Document = this.Doc): void { }
         protected Render(Doc: Document) {
             this.Doc = Doc;
         }

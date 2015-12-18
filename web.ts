@@ -132,7 +132,7 @@ module web.ts {
         }
         private Doc: Document;
         //Add and Remove Items Template
-        abstract Add(item: T, i?: number, doc?: Document): void;
+        abstract Add(item: T, i?: number, doc?: Document): void; 
         abstract Remove(i: number): void;
         protected Render(Doc: Document) {
             this.Doc = Doc;

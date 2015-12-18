@@ -79,6 +79,7 @@ module web.ts {
             }
         }
     }
+    /*** web.ts libraries ***/
     //Hide Templates
     var style = document.createElement('style');
     style.type = 'text/css';
@@ -86,10 +87,13 @@ module web.ts {
     document.getElementsByTagName('head')[0].appendChild(style);
     /*** Library ***/
     export abstract class Page {
+        constructor() {
+            this.Load();
+        }
         protected abstract View(): string;//Contains the page location or elements# to get template from and what to do while loading is taking place
         protected abstract Render(doc: Document): void;//Callback when the template is downloaded and sent for user to render as desired.
         //Loading Function
-        public Load() {
+        private Load() {
             var view: string = this.View();
             if (view != null && view.length > 1) {
                 if (view[0] != "#") {
@@ -107,22 +111,25 @@ module web.ts {
         }
     }
     export abstract class View<T> extends Page {
+        private item:T;
+        constructor(item: T) {
+            super();
+            this.item = item;
+        }
         private Doc: Document;
         //Add and Remove Items Template
-        abstract Add(item: T, i?: number, doc?: Document): void;
-        abstract Remove(i: number): void;
+        public abstract Apply(item: T, Doc?: Document): void;
         protected Render(Doc: Document) {
             this.Doc = Doc;
+            this.Apply(this.item);
         }
-        //Start List Item Function
-        public List(items: T[]): void {
-            this.Load();
-            for (var item in items) {
-                this.Add(item);
-            }
-        }
+
     }
     export abstract class List<T> extends Page {
+        constructor(items: T[]) {
+            super();
+            this.List(items);
+        }
         private Doc: Document;
         //Add and Remove Items Template
         abstract Add(item: T, i?: number, doc?: Document): void;
@@ -131,8 +138,7 @@ module web.ts {
             this.Doc = Doc;
         }
         //Start List Item Function
-        public List(items: T[]): void {
-            this.Load();
+        private List(items: T[]): void {
             for (var item in items) {
                 this.Add(item);
             }

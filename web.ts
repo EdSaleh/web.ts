@@ -56,7 +56,7 @@ module web.ts {
                         document.getElementById("content").innerHTML = doc.body.innerHTML;
                     };
                 }
-                (new example()); break;
+                (new example()).Load(); break;
             //************End Change*******************
         }
         /*
@@ -144,6 +144,7 @@ module web.ts {
             }
         }
     }
+    //ajax get resource
     export function get(url: string, callback: Function, timeout: number = 4000, timeoutcallback: Function = () => { }, type: string = "GET", async: boolean = true): void {
         var xhttp = new XMLHttpRequest();
         xhttp.onload = callback();
@@ -151,6 +152,5 @@ module web.ts {
         xhttp.ontimeout = timeoutcallback();
         xhttp.open(type, url, async);
         xhttp.send();
-    }
-    export function documentify(obj: Object): Document { return new DOMParser().parseFromString(JSON.stringify(obj), "text/xml"); }
+    }  
 }

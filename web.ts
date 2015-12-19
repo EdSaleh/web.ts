@@ -125,6 +125,7 @@ module web.ts {
         }
         protected Doc: Document = document;
         protected View():string {return null;}
+        //Application method to apply work on the view
         public Apply(item: T, Doc: Document = this.Doc): void { }
         protected Render(Doc: Document) {
             this.Doc = Doc;
@@ -137,8 +138,7 @@ module web.ts {
             super();
             this.List(items);
         }
-        protected Doc: Document = document;
-        protected View():string {return null;}
+        protected Doc: Document = null;
         //Add and Remove Items Template
         public Add(item: T, i: number = null, doc: Document = this.Doc): void { }
         public Remove(item: T, i: number = null, doc: Document = this.Doc): void { }

@@ -123,8 +123,8 @@ module web.ts {
             super();
             this.item = item;
         }
-        protected Doc: Document;
-        //Add and Remove Items Template
+        protected Doc: Document = document;
+        protected View():string {return null;}
         public Apply(item: T, Doc: Document = this.Doc): void { }
         protected Render(Doc: Document) {
             this.Doc = Doc;
@@ -137,7 +137,8 @@ module web.ts {
             super();
             this.List(items);
         }
-        protected Doc: Document;
+        protected Doc: Document = document;
+        protected View():string {return null;}
         //Add and Remove Items Template
         public Add(item: T, i: number = null, doc: Document = this.Doc): void { }
         public Remove(item: T, i: number = null, doc: Document = this.Doc): void { }

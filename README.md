@@ -8,7 +8,7 @@ An Easier, Faster, and Efficient way to create websites.
 
 * For views, it extends pages; create a ts class that extends web.ts.View<T>.  You fetch a document from View() implement and populate using Apply(item:T, doc:?Document). Every time Apply(item:T) is called, it preforms the action. Process are started after Instantiation(item:T)
 
-* Use switch(hash) cases of main() method in web.ts to load/List a specific Page or List object on a specific hash name. Hash links with "web" css class will continue to work even if "onhashchange" event isn't supported as pages will reload automatically when this happens.
+* Use switch(hash) cases of main() method in web.ts to start the process for specific Page or List or View object on a specific hash name. Hash links with "web" css class will continue to work even if "onhashchange" event isn't supported as pages will reload automatically when this happens.
 
 ##Pages
 1. Implement the View() Method to return the location of the view page you would like to show, for example, "/Page1.txt".

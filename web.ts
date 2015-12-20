@@ -147,7 +147,7 @@ module web.ts {
             this.list(this.items);
         }
         //Start List Item Function
-        private list(items: T[]): void {
+        public list(items: T[]): void {
             for (var item in items) {
                 this.add(item);
             }

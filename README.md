@@ -13,7 +13,7 @@ Web Developers are facing problems while designing websites. Javascript and HTML
 
 * For lists, it extends Page class; create a ts class that extends web.ts.List<T>.  You fetch a document from view() implement and populate (add() Implement each item individually), and remove(). Process are started after Instantiation(arr:T)
 
-* For Views, it extends Page class; create a ts class that extends web.ts.view<T>.  You fetch a document from view() implement and populate using apply(item:T, doc:?Document). Every time apply(item:T) is called, it preforms the action. Process are started after Instantiation(item:T)
+* For Views, it extends Page class; create a ts class that extends web.ts.View<T>.  You fetch a document from view() implement and populate using apply(item:T, doc:?Document). Every time apply(item:T) is called, it preforms the action. Process are started after Instantiation(item:T)
 
 * Use switch(hash) cases of main() method in web.ts to start the process for specific Page or List or View object on a specific hash name so pages are loaded when a Url change is detected and load different pages based on the name of the Hash. links(a element) with "web" css class will continue to work even if "onhashchange" event isn't supported as pages will reload automatically when this happens. Use Interactive Web Design tool for HTML/CSS such as Visual Studio WebForm design mode to design the view. The View can be an element on the document or a seperate html file document that can be fetched.
 

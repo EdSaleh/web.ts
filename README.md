@@ -1,6 +1,6 @@
 #web.ts
 Create Web Apps the Object Oriented way.
-An Easier, Faster, and Efficient way to create websites. 
+An Easier, Faster, and Efficient way to create websites with MVC architecture.
 
 ##Introduction
 web.ts is designed to make web design easier by using Object Oriented programing where is there separation between Views(HTML/CSS) and Controller(.ts classes) in Typescript to create native OO and asynchronous(AJAX) apps. Views are designed using Interactive Web Design softwares such as Visual Studio WebForm Designer and the Controllers are Typescript classes of Page, List, and View.

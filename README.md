@@ -28,6 +28,6 @@ List class uses Load() and Render() of the page extension internally and the met
 2. Create an Instance of and it(arr:T[]) and starts automatically.
 
 ##Views
-1. Implement the Apply(item:T,doc:?Document) Method to apply the action with item on doc. And implement View() method to return the document that will be used in rendering.
+1. Implement the Apply(item:T,doc:?Document) Method to apply the action with item on doc. And implement View() method to return the document that will be used in rendering or not if you want to use the current document as the template.
 
 2. Create an Instance of and it(arr:T[]) and starts automatically.

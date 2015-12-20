@@ -161,5 +161,5 @@ module web.ts {
         xhttp.ontimeout = timeoutcallback();
         xhttp.open(type, url, async);
         xhttp.send();
-    }  
+    }
 }

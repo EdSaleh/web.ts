@@ -9,11 +9,11 @@ module web.ts {
             case "": default:
                 class Index extends web.ts.Page {
                     //view page for action
-                    protected View(): string {
+                    protected view(): string {
                         return "/Page1.txt";
                     }
                     //how to render document method
-                    protected Render(doc: Document) {
+                    protected render(doc: Document) {
                         document.title = "Page1";
                         document.getElementById("content").innerHTML = doc.body.innerHTML;
                     };
@@ -22,11 +22,11 @@ module web.ts {
             case "Page2":
                 class Page2 extends web.ts.Page {
                     //view page for action
-                    protected View(): string {
+                    protected view(): string {
                         return "/Page2.txt";
                     }
                     //how to render document method
-                    protected Render(doc: Document) {
+                    protected render(doc: Document) {
                         document.title = "Page2";
                         document.getElementById("content").innerHTML = doc.body.innerHTML;
                     };
@@ -36,10 +36,10 @@ module web.ts {
                 //get Template from an element on Page(web ts css class makes the element hidden)
                 class example extends web.ts.Page {
                     //public Renderer: Function;
-                    protected View(): string {
+                    protected view(): string {
                         return "#example";//(get element with id #)
                     }
-                    protected Render(doc: Document) {
+                    protected render(doc: Document) {
                         /*
                         //List Example
                             class list extends web.ts.List<string>{
@@ -95,21 +95,21 @@ module web.ts {
     /*** Library ***/
     export abstract class Page {
         constructor() {
-            this.Load();
+            this.load();
         }
-        protected abstract View(): string;//Contains the page location or elements# to get template from and what to do while loading is taking place
-        protected abstract Render(doc: Document): void;//Callback when the template is downloaded and sent for user to render as desired.
+        protected abstract view(): string;//Contains the page location or elements# to get template from and what to do while loading is taking place
+        protected abstract render(doc: Document): void;//Callback when the template is downloaded and sent for user to render as desired.
         //Loading Function
-        private Load() {
-            var view: string = this.View();
+        private load() {
+            var view: string = this.view();
             if (view != null && view.length > 1) {
                 if (view[0] != "#") {
                     var xhttp = new XMLHttpRequest();
-                    xhttp.onload = () => this.Render(this.TextToDocument(xhttp.responseText));
+                    xhttp.onload = () => this.render(this.TextToDocument(xhttp.responseText));
                     xhttp.open("GET", view, true);
                     xhttp.send();
                 } else {
-                    this.Render(this.TextToDocument(document.getElementById(view.substr(1)).outerHTML));
+                    this.render(this.TextToDocument(document.getElementById(view.substr(1)).outerHTML));
                 }
             }
         }
@@ -123,32 +123,32 @@ module web.ts {
             super();
             this.item = item;
         }
-        protected Doc: Document = document;
-        protected View():string {return null;}
+        protected doc: Document = document;
+        protected view():string {return null;}
         //Application method to apply work on the view
-        public Apply(item: T, Doc: Document = this.Doc): void { }
-        protected Render(Doc: Document) {
-            this.Doc = Doc;
-            this.Apply(this.item);
+        public apply(item: T, doc: Document = this.doc): void { }
+        protected render(doc: Document) {
+            this.doc = doc;
+            this.apply(this.item);
         }
 
     }
     export abstract class List<T> extends Page {
         constructor(items: T[]) {
             super();
-            this.List(items);
+            this.list(items);
         }
-        protected Doc: Document = null;
+        protected doc: Document = null;
         //Add and Remove Items Template
-        public Add(item: T, i: number = null, doc: Document = this.Doc): void { }
-        public Remove(item: T, i: number = null, doc: Document = this.Doc): void { }
-        protected Render(Doc: Document) {
-            this.Doc = Doc;
+        public add(item: T, i: number = null, doc: Document = this.doc): void { }
+        public remove(item: T, i: number = null, doc: Document = this.doc): void { }
+        protected render(doc: Document) {
+            this.doc = doc;
         }
         //Start List Item Function
-        private List(items: T[]): void {
+        private list(items: T[]): void {
             for (var item in items) {
-                this.Add(item);
+                this.add(item);
             }
         }
     }

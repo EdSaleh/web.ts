@@ -142,12 +142,14 @@ module web.ts {
         //Add and Remove Items Template
         public add(item: T, i: number = null, doc: Document = this.doc): void { }
         public remove(item: T, i: number = null, doc: Document = this.doc): void { }
+        public reset(): void { }
         protected render(doc: Document) {
             this.doc = doc;
             this.list(this.items);
         }
         //Start List Item Function
         public list(items: T[]): void {
+            this.reset();
             for (var item in items) {
                 this.add(item);
             }

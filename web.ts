@@ -119,7 +119,7 @@ module web.ts {
     }
     export abstract class View<T> extends Page {
         private item:T;
-        constructor(item: T) {
+        constructor(item: T=null) {
             super();
             this.item = item;
         }
@@ -134,9 +134,9 @@ module web.ts {
 
     }
     export abstract class List<T> extends Page {
-        constructor(items: T[]) {
+        private items: T[];
+        constructor(items: T[]=null) {
             super();
-            this.list(items);
         }
         protected doc: Document = null;
         //Add and Remove Items Template
@@ -144,6 +144,7 @@ module web.ts {
         public remove(item: T, i: number = null, doc: Document = this.doc): void { }
         protected render(doc: Document) {
             this.doc = doc;
+            this.list(this.items);
         }
         //Start List Item Function
         private list(items: T[]): void {

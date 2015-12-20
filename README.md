@@ -4,15 +4,15 @@ An Easier, Faster, and Efficient way to create websites.
 
 * For pages, you create a ts class file that extends web.ts.Page. You fetch a and prepare document using View() implement and populate using Render() implement. View is called once for the class and all Subclasses. Process are started after Instantiation. 
 
-* For lists, it extends pages; create a ts class that extends web.ts.List<T>.  You fetch a document from View() implement and populate (Add() Implement each item individually), and Remove. Process are started after Instantiation(arr:T)
+* For lists, it extends Page class; create a ts class that extends web.ts.List<T>.  You fetch a document from View() implement and populate (Add() Implement each item individually), and Remove. Process are started after Instantiation(arr:T)
 
-* For views, it extends pages; create a ts class that extends web.ts.View<T>.  You fetch a document from View() implement and populate using Apply(item:T, doc:?Document). Every time Apply(item:T) is called, it preforms the action. Process are started after Instantiation(item:T)
+* For views, it extends Page class; create a ts class that extends web.ts.View<T>.  You fetch a document from View() implement and populate using Apply(item:T, doc:?Document). Every time Apply(item:T) is called, it preforms the action. Process are started after Instantiation(item:T)
 
-* Use switch(hash) cases of main() method in web.ts to start the process for specific Page or List or View object on a specific hash name so pages are loaded when a Url change is detected and load different pages based on the name of the Hash. links(a element) with "web" css class will continue to work even if "onhashchange" event isn't supported as pages will reload automatically when this happens.
+* Use switch(hash) cases of main() method in web.ts to start the process for specific Page or List or View object on a specific hash name so pages are loaded when a Url change is detected and load different pages based on the name of the Hash. links(a element) with "web" css class will continue to work even if "onhashchange" event isn't supported as pages will reload automatically when this happens. Use Interactive Web Design tool for HTML/CSS such as Visual Studio WebForm design mode to design the view. The view can be an element on the document or a seperate html file document that can be fetched.
 
 ##Pages
 1. Implement the View() Method to return the location of the view page you would like to show, for example, "/Page1.txt".
-You can also return #element (id of an element) which could be hidden using "web ts" class, which returns the outerHTML content removing " ts" class of an element in the document page. The View source file can be designed with HTML Designer softwares.
+You can also return #element (id of an element) which could be hidden using "web ts" class, which returns the outerHTML content removing " ts" class of an element in the document page. The View source file can be designed with Interactive HTML Designer softwares such as the free Viusal Studio WebForm design.
 You can use the View() Method to prepare the document before View(), it will be used once internally.
 
 2. Implement the Render(document) method callback which is used to render the content when it's already available.

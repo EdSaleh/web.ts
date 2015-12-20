@@ -8,7 +8,7 @@ An Easier, Faster, and Efficient way to create websites.
 
 * For views, it extends pages; create a ts class that extends web.ts.View<T>.  You fetch a document from View() implement and populate using Apply(item:T, doc:?Document). Every time Apply(item:T) is called, it preforms the action. Process are started after Instantiation(item:T)
 
-* Use switch(hash) cases of main() method in web.ts to start the process for specific Page or List or View object on a specific hash name. Hash links with "web" css class will continue to work even if "onhashchange" event isn't supported as pages will reload automatically when this happens.
+* Use switch(hash) cases of main() method in web.ts to start the process for specific Page or List or View object on a specific hash name so pages are loaded when a Url change is detected and load different pages based on the name of the Hash. links(a element) with "web" css class will continue to work even if "onhashchange" event isn't supported as pages will reload automatically when this happens.
 
 ##Pages
 1. Implement the View() Method to return the location of the view page you would like to show, for example, "/Page1.txt".
@@ -17,9 +17,7 @@ You can use the View() Method to prepare the document before View(), it will be 
 
 2. Implement the Render(document) method callback which is used to render the content when it's already available.
 
-3. create instance of this and it starts automatically.
-
-4. Pages are loaded when a Url change is detected and load a different page based on the name of the Hash. 
+3. Create instance of this and it starts automatically.
 
 ##Lists
 1. Implement the Add() and Remove() Method to be used in adding or removing items. And implement View() method to return the document that will be used in rendering.
@@ -31,3 +29,5 @@ List class uses Load() and Render() of the page extension internally and the met
 1. Implement the Apply(item:T,doc:?Document) Method to apply the action with item on doc. And implement View() method to return the document that will be used in rendering or not if you want to use the current document as the template.
 
 2. Create an Instance of and it(arr:T[]) and starts automatically.
+
+[Open Source Project Website Link](https://github.com/medozs/web.ts)

@@ -3,10 +3,10 @@ Create Web Apps the Object Oriented way.
 An Easier, Faster, and Efficient way to create websites. 
 
 ##Introduction
-web.ts is designed to make web design easier by using Object Oriented programing where is there separation between Views(HTML/CSS) and Controller(.ts classes) in Typescript to create native OO and asynchronous(AJAX) apps. Views are design using Interactive Web Design softwares such as Visual Studio WebForm Designer and the Controllers are Typescript classes of Page, List, and View.
+web.ts is designed to make web design easier by using Object Oriented programing where is there separation between Views(HTML/CSS) and Controller(.ts classes) in Typescript to create native OO and asynchronous(AJAX) apps. Views are designed using Interactive Web Design softwares such as Visual Studio WebForm Designer and the Controllers are Typescript classes of Page, List, and View.
 
 
-Web Developers are facing problems while designing websites. Javascript and HTML/CSS are all mixed together without structure or organization. With web.ts, there is separation between Views and Controllers, also Models to achieve MVC, which is best recommended type of architecture You will not need to learn any new techniques or languages for as Typescript is merely Javascript with OO added(Future JS), and the library is simple and easy to follow.
+Web Developers are facing problems while designing websites. Javascript and HTML/CSS are all mixed together without structure or organization. With web.ts, there is separation between Views and Controllers, also Models to achieve MVC, which is best recommended type of architecture. You will not need to learn any new techniques or languages for as Typescript is merely Javascript with OO added(Future JS), and the library is simple and easy to follow.
 
 ##Object Classes(Components)
 * For pages, you create a ts class file that extends web.ts.Page. You fetch a and prepare document using View() implement and populate using Render() implement. View is called once for the class and all Subclasses. Process are started after Instantiation. 

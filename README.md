@@ -12,7 +12,7 @@ An Easier, Faster, and Efficient way to create websites.
 
 ##Pages
 1. Implement the View() Method to return the location of the view page you would like to show, for example, "/Page1.txt".
-You can also return #element (id of an element), which returns the outerHTML content of an element in the document page. The View source file can be designed with HTML Designer softwares.
+You can also return #element (id of an element) which could be hidden using "web ts" class, which returns the outerHTML content removing " ts" class of an element in the document page. The View source file can be designed with HTML Designer softwares.
 You can use the View() Method to prepare the document before View(), it will be used once internally.
 
 2. Implement the Render(document) method callback which is used to render the content when it's already available.

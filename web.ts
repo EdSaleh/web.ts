@@ -38,7 +38,7 @@ module web.ts {
                         return "#element";// just use the current document as the view. 
                     }
                     public add(item: string, i?: number, doc: Document = this.doc) {
-                        var elm = docElement(doc); //document.createElement("div");
+                        var elm = docElement(doc); 
                         elm.innerText = item;
                         elm.onclick = () => this.remove(item);
                         document.getElementById("content").appendChild(elm);

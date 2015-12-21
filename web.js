@@ -68,7 +68,7 @@ var web;
                         List_1.prototype.add = function (item, i, doc) {
                             var _this = this;
                             if (doc === void 0) { doc = this.doc; }
-                            var elm = docElement(doc); //document.createElement("div");
+                            var elm = docElement(doc);
                             elm.innerText = item;
                             elm.onclick = function () { return _this.remove(item); };
                             document.getElementById("content").appendChild(elm);

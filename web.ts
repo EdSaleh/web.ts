@@ -149,7 +149,6 @@ module web.ts {
         }
         //Start List Item Function
         public list(items: T[]): void {
-            this.reset();
             for (var item in items) {
                 this.add(item);
             }

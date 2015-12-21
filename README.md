@@ -38,3 +38,4 @@ List class uses load() and render(), in addition to view() of the page extension
 2. Create an Instance of and it(arr:T[]). Process are started after Instantiation(item:T) if View() is not empty or null, else use apply() method.
 
 [Open Source Project Website Link](https://github.com/medozs/web.ts)
+[Gif Tutorial](https://github.com/medozs/web.ts/blob/master/example.gif)

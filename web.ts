@@ -117,6 +117,7 @@ module web.ts {
         }
         protected abstract view(): string;//Contains the page location or elements# to get template from and what to do while loading is taking place
         protected abstract render(doc: Document): void;//Callback when the template is downloaded and sent for user to render as desired.
+        protected method(): string { return "GET"; }
         //Loading Function
         private load() {
             var view: string = this.view();
@@ -124,7 +125,7 @@ module web.ts {
                 if (view[0] != "#") {
                     var xhttp = new XMLHttpRequest();
                     xhttp.onload = () => this.render(TextToDocument(xhttp.responseText));
-                    xhttp.open("GET", view, true);
+                    xhttp.open(this.method(), view, true);
                     xhttp.send();
                 } else {
                     this.render(TextToDocument(document.getElementById(view.substr(1)).outerHTML));

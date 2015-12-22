@@ -160,7 +160,7 @@ var web;
                     if (view[0] != "#") {
                         var xhttp = new XMLHttpRequest();
                         xhttp.onload = function () { return _this.render(TextToDocument(xhttp.responseText)); };
-                        xhttp.open("GET", view, true);
+                        xhttp.open(view.lastIndexOf(".") > view.lastIndexOf("/") ? "GET" : "POST", view, true);
                         xhttp.send();
                     }
                     else {

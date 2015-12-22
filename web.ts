@@ -124,7 +124,7 @@ module web.ts {
                 if (view[0] != "#") {
                     var xhttp = new XMLHttpRequest();
                     xhttp.onload = () => this.render(TextToDocument(xhttp.responseText));
-                    xhttp.open(view.lastIndexOf(".") > view.lastIndexOf("/")?"GET":"POST", view, true);
+                    xhttp.open(view.lastIndexOf("?")<0 && view.lastIndexOf(".") > view.lastIndexOf("/")?"GET":"POST", view, true);
                     xhttp.send();
                 } else {
                     this.render(TextToDocument(document.getElementById(view.substr(1)).outerHTML));

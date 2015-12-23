@@ -161,7 +161,7 @@ module web.ts {
         public length(): void { }
         protected render(doc: Document) {
             this.doc = doc;
-            this.set();
+            this.set(true);
         }
         //Start List Item Function
         public list(items: T[]): void {

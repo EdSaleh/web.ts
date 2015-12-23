@@ -214,7 +214,7 @@ var web;
             List.prototype.length = function () { };
             List.prototype.render = function (doc) {
                 this.doc = doc;
-                this.set();
+                this.set(true);
             };
             //Start List Item Function
             List.prototype.list = function (items) {

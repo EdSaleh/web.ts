@@ -7,18 +7,22 @@
         var path: string = (window.location.href.substr(window.location.href.lastIndexOf("#") + 1));
         var pathIndxSlash: number = path.indexOf("/"), pathIndxQuestion: number = path.indexOf("?");
         switch (path.substr(0, pathIndxSlash < pathIndxQuestion && pathIndxSlash > 0 ? pathIndxSlash : (pathIndxQuestion < pathIndxSlash && pathIndxQuestion > 0 ? pathIndxQuestion : path.length))) {
-            case "": case "Index": case "Page": default:
+            case "":
+            case "!/Index":
+            case "!/Page":
+            default:
                 document.title = "web.ts - Page";
                 class Index extends WebDocument {
                     //view page for action
                     protected view(): string {
-                        return "/Index.txt";
+                        return "/Page.html";
                     }
                     //how to render document method
                     protected result(doc: Document) {
-                        document.getElementById("content").innerHTML = getElement(doc).innerText;
+                        document.getElementById("content").innerHTML = getElement(doc).outerHTML;
                     };
-                } (new Index());
+                }
+                (new Index());
                 break;
             case "view":
                 document.title = "web.ts - View";
@@ -73,7 +77,10 @@
         for (var i = 0; i < elms.length; i++) {
             if ((<HTMLAnchorElement>elms[i]).classList.contains("web")) {
                 (<HTMLAnchorElement>elms[i]).onclick = function () {
-                    window.location.href = (<HTMLAnchorElement>this).href;
+                    var href = (<HTMLAnchorElement>this).href.substr((<HTMLAnchorElement>this).href.lastIndexOf("/")+1);
+                    if (href.length > 0 && href[0] != "#" && href.indexOf(".") > 0)
+                        href = "/#!/" + href.substr(0, href.indexOf("."))
+                    window.location.href =href;
                     main();
                     return false;
                 }
@@ -130,7 +137,7 @@
 
     export function getElement(edoc: Document | HTMLElement): HTMLElement {
         if (edoc.nodeName.toLowerCase() === "#document") {
-            return (<HTMLElement>((<Document>edoc).body.firstChild.cloneNode(true)));
+            return (<HTMLElement>((<Document>edoc).getElementsByTagName("div")[0].cloneNode(true)));
         }
         else{
             var elm: HTMLElement = <HTMLElement>((<HTMLElement>edoc).cloneNode(true));

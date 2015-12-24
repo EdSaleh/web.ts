@@ -16,8 +16,8 @@ var web;
             var pathIndxSlash = path.indexOf("/"), pathIndxQuestion = path.indexOf("?");
             switch (path.substr(0, pathIndxSlash < pathIndxQuestion && pathIndxSlash > 0 ? pathIndxSlash : (pathIndxQuestion < pathIndxSlash && pathIndxQuestion > 0 ? pathIndxQuestion : path.length))) {
                 case "":
-                case "Index":
-                case "Page":
+                case "!/Index":
+                case "!/Page":
                 default:
                     document.title = "web.ts - Page";
                     var Index = (function (_super) {
@@ -27,11 +27,11 @@ var web;
                         }
                         //view page for action
                         Index.prototype.view = function () {
-                            return "/Index.txt";
+                            return "/Page.html";
                         };
                         //how to render document method
                         Index.prototype.result = function (doc) {
-                            document.getElementById("content").innerHTML = getElement(doc).innerText;
+                            document.getElementById("content").innerHTML = getElement(doc).outerHTML;
                         };
                         ;
                         return Index;
@@ -103,7 +103,10 @@ var web;
             for (var i = 0; i < elms.length; i++) {
                 if (elms[i].classList.contains("web")) {
                     elms[i].onclick = function () {
-                        window.location.href = this.href;
+                        var href = this.href.substr(this.href.lastIndexOf("/") + 1);
+                        if (href.length > 0 && href[0] != "#" && href.indexOf(".") > 0)
+                            href = "/#!/" + href.substr(0, href.indexOf("."));
+                        window.location.href = href;
                         main();
                         return false;
                     };
@@ -153,7 +156,7 @@ var web;
         ts.WebList = WebList;
         function getElement(edoc) {
             if (edoc.nodeName.toLowerCase() === "#document") {
-                return (edoc.body.firstChild.cloneNode(true));
+                return (edoc.getElementsByTagName("div")[0].cloneNode(true));
             }
             else {
                 var elm = (edoc.cloneNode(true));

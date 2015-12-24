@@ -5,7 +5,6 @@ An Easier, Faster, and Efficient way to create websites with MVC architecture.
 ##Introduction
 web.ts is designed to make web design easier by using Object Oriented programing where is there separation between Views(HTML/CSS) and Controller(.ts classes) in Typescript to create native OO and asynchronous(AJAX) apps. Views are designed using Interactive Web Design softwares such as Visual Studio WebForm Designer and the Controllers are Typescript classes of Page, List, and View.
 
-
 Web Developers are facing problems while designing websites. Javascript and HTML/CSS are all mixed together without structure or organization. With web.ts, there is separation between Views and Controllers, also Models to achieve MVC, which is best recommended type of architecture. You will not need to learn any new techniques or languages for as Typescript is merely Javascript with OO added(Future JS), and the library is simple and easy to follow.
 
 ##Object Classes(Components)
@@ -38,5 +37,3 @@ List class uses load() and render(), in addition to view() of the page extension
 2. Create an Instance of and it(arr:T[]). Process are started after Instantiation(item:T) and calls apply() if View() is not empty or null, else use apply() method.
 
 [Open Source Project Website Link](https://github.com/medozs/web.ts)
-
-[Gif Tutorial](https://github.com/medozs/web.ts/blob/master/example.gif)

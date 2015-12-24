@@ -18,5 +18,3 @@ It's a list component with methods such as add/remove(item:T, I?:number), reset(
 
 
 [Open Source Project Website Link](https://github.com/medozs/web.ts)
-
-[Gif Tutorial](https://github.com/medozs/web.ts/blob/master/example.gif)

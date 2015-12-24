@@ -1,39 +1,21 @@
 #web.ts
-Create Web Apps the Object Oriented way.
-An Easier, Faster, and Efficient way to create websites with MVC architecture.
+Create Web Apps using Object Oriented MVC architecture.
 
-##Introduction
-web.ts is designed to make web design easier by using Object Oriented programing where is there separation between Views(HTML/CSS) and Controller(.ts classes) in Typescript to create native OO and asynchronous(AJAX) apps. Views are designed using Interactive Web Design softwares such as Visual Studio WebForm Designer and the Controllers are Typescript classes of Page, List, and View.
+web.ts is designed to make web design better using Object Oriented programing and MVC architecture where is there separation between Views(HTML/CSS) and Controller(.ts classes) in Typescript to create native OO and asynchronous(AJAX) apps. Hence, due to separation, Views are designed using Interactive Web Design softwares such as Visual Studio WebForm Designer and the Controllers are Typescript classes extending WebDocument, WebList or implementing WebView. The framework uses TypeScript and easy to learn.
 
-Web Developers are facing problems while designing websites. Javascript and HTML/CSS are all mixed together without structure or organization. With web.ts, there is separation between Views and Controllers, also Models to achieve MVC, which is best recommended type of architecture. You will not need to learn any new techniques or languages for as Typescript is merely Javascript with OO added(Future JS), and the library is simple and easy to follow.
+##main() Method:
+Allows to execute or create components using hash-link anchors when navigating. 
+Cases can be chosen based on specific hash command with format #hash-command[ /?]args...
+##WebView Component:
+Download a document from the Internet and use it in your page. 
+This component has two methods:-
+view(): contains the location of the document to be downloaded. If you location last word after “/” contains a “.” Ex: /file.txt it will do a get request, else or it contains a “?” Or ends with “/” it will do a post request.
+result(doc:Document): callback with the do omens when it’s finished downloading.
+getElement(doc) method takes first div in the document. for SEO, anchors having "web" class and no # in href begining ex: Page.html, redirects to hashbang /#!/Page 
+##WebView<T> Interface Component:
+Contains apply(item:T) method to use on a specific area on your page document.
+##WebList<T> Component:
+It's a list component with methods such as add/remove(item:T, I?:number), reset(), and length():number that will need to be implemented to create a functional list. addRange(items:T[], I?:number) is already implemented and will use implementation of add() method internally. More methods can be added or creating a constructor if desired to the extending class.
 
-##Object Classes(Components)
-* Page: you create a ts class file that extends web.ts.Page. You fetch a and prepare document using view() implement and populate using render() implement. view() is called once for the class and all Subclasses. Process are started after Instantiation. 
-
-* List: it extends Page class; create a ts class that extends web.ts.List<T>.  You fetch a document from view() implement and populate (add() Implement each item individually), remove() and set(). Process are started after Instantiation(arr:T) and calls set() if View() is not empty or null, else use list() or set() method.
-
-* View: it extends Page class; create a ts class that extends web.ts.View<T>.  You fetch a document from view() implement and populate using apply(item:T, doc:?Document). Every time apply(item:T) is called, it preforms the action. Process are started after Instantiation(item:T) and calls apply() if View() is not empty or null, else use apply() method.
-
-* Use switch(hash) cases of main() method in web.ts to start the process for specific Page or List or View object on a specific hash name so pages are loaded when a Url change is detected and load different pages based on the name of the Hash. links(a element) with "web" css class will continue to work even if "onhashchange" event isn't supported as pages will reload automatically when this happens. Use Interactive Web Design tool for HTML/CSS such as Visual Studio WebForm design mode to design the view. The View can be an element on the document or a seperate html file document that can be fetched.
-
-###Pages
-1. Implement the view() Method to prepare document and return the location of the view page you would like to show, for example, "/Page1.txt".
-You can also return #element (id of an element) which could be hidden using "web ts" class, which returns the outerHTML content removing " ts" class of an element in the document page. The view source file can be designed with Interactive HTML Designer softwares such as the free Viusal Studio WebForm design.
-You can use the view() Method to prepare the document before render(), it will be used once internally.
-
-2. Implement the render(document) method callback which is used to render the content when it's already available.
-
-3. Create instance of this and it starts automatically.
-
-###Lists
-1. Implement the add() and remove() Method to be used in adding or removing items. And implement view() method to return the document that will be used in rendering.
-List class uses load() and render(), in addition to view() of the page extension internally and the methods behave the same as Page class.
-
-2. Create an Instance of and it(arr:T[]). Process are started after Instantiation(item:T) and calls set() if View() is not empty or null, else use list()/set() method.
-
-###Views
-1. Implement the apply(item:T,doc:?Document) Method to apply the action with item on doc. And implement view() method to return the document that will be used in rendering or not if you want to use the current document as the template.
-
-2. Create an Instance of and it(arr:T[]). Process are started after Instantiation(item:T) and calls apply() if View() is not empty or null, else use apply() method.
 
 [Open Source Project Website Link](https://github.com/medozs/web.ts)

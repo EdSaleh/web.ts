@@ -30,12 +30,12 @@ var web;
                             return "/Index.txt";
                         };
                         //how to render document method
-                        Index.prototype.render = function (doc) {
+                        Index.prototype.result = function (doc) {
                             document.getElementById("content").innerHTML = getElement(doc).innerText;
                         };
                         ;
                         return Index;
-                    })(web.ts.Page);
+                    })(WebDocument);
                     (new Index());
                     break;
                 case "view":
@@ -54,19 +54,19 @@ var web;
                     break;
                 case "list":
                     document.title = "web.ts - List";
-                    var List_1 = (function (_super) {
-                        __extends(List_1, _super);
-                        function List_1() {
+                    var List = (function (_super) {
+                        __extends(List, _super);
+                        function List() {
                             _super.apply(this, arguments);
                         }
-                        List_1.prototype.add = function (item, i) {
+                        List.prototype.add = function (item, i) {
                             var _this = this;
                             var elm = getElement(document.getElementById("element"));
                             elm.innerText = item;
                             elm.onclick = function () { return _this.remove(item); };
                             document.getElementById("content").appendChild(elm);
                         };
-                        List_1.prototype.remove = function (item, i) {
+                        List.prototype.remove = function (item, i) {
                             if (i === void 0) { i = null; }
                             if (item != null) {
                                 var elms = document.getElementById("content").children;
@@ -78,13 +78,13 @@ var web;
                                 document.getElementById("content").children[i].remove();
                             }
                         };
-                        List_1.prototype.length = function () { return null; };
-                        List_1.prototype.reset = function () {
+                        List.prototype.length = function () { return null; };
+                        List.prototype.reset = function () {
                             document.getElementById("content").innerHTML = "";
                         };
-                        return List_1;
-                    })(web.ts.List);
-                    var list = new List_1(); //Do the operation
+                        return List;
+                    })(WebList);
+                    var list = new List(); //Do the operation
                     document.getElementById("content").innerHTML = "";
                     var strs = ["click on any item to remove", "a", "b", "c"];
                     list.addRange(strs);
@@ -117,40 +117,40 @@ var web;
         style.innerHTML = '.web.ts { display: none; }';
         document.getElementsByTagName('head')[0].appendChild(style);
         /*** Library ***/
-        var Page = (function () {
-            function Page() {
+        var WebDocument = (function () {
+            function WebDocument() {
                 this.load();
             }
             //Loading Function
-            Page.prototype.load = function () {
+            WebDocument.prototype.load = function () {
                 var _this = this;
                 var view = this.view();
                 if (view != null && view.length > 1 && view[0] != "#") {
                     var xhttp = new XMLHttpRequest();
-                    xhttp.onload = function () { return _this.render(TextToDocument(xhttp.responseText)); };
+                    xhttp.onload = function () { return _this.result(TextToDocument(xhttp.responseText)); };
                     xhttp.open(view.lastIndexOf("?") < 0 && view.lastIndexOf(".") > view.lastIndexOf("/") ? "GET" : "POST", view, true);
                     xhttp.send();
                 }
             };
-            return Page;
+            return WebDocument;
         })();
-        ts.Page = Page;
+        ts.WebDocument = WebDocument;
         function TextToDocument(text) {
             return (new DOMParser().parseFromString(text, "text/html"));
         }
-        var List = (function () {
-            function List() {
+        var WebList = (function () {
+            function WebList() {
             }
             //Start List Item Function
-            List.prototype.addRange = function (items, i) {
+            WebList.prototype.addRange = function (items, i) {
                 if (i === void 0) { i = this.length(); }
                 for (var indx = 0; indx < items.length; indx++) {
                     this.add(items[indx], i + indx);
                 }
             };
-            return List;
+            return WebList;
         })();
-        ts.List = List;
+        ts.WebList = WebList;
         function getElement(edoc) {
             if (edoc.nodeName.toLowerCase() === "#document") {
                 return (edoc.body.firstChild.cloneNode(true));

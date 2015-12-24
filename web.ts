@@ -9,13 +9,13 @@
         switch (path.substr(0, pathIndxSlash < pathIndxQuestion && pathIndxSlash > 0 ? pathIndxSlash : (pathIndxQuestion < pathIndxSlash && pathIndxQuestion > 0 ? pathIndxQuestion : path.length))) {
             case "": case "Index": case "Page": default:
                 document.title = "web.ts - Page";
-                class Index extends web.ts.Page {
+                class Index extends WebDocument {
                     //view page for action
                     protected view(): string {
                         return "/Index.txt";
                     }
                     //how to render document method
-                    protected render(doc: Document) {
+                    protected result(doc: Document) {
                         document.getElementById("content").innerHTML = getElement(doc).innerText;
                     };
                 } (new Index());
@@ -23,7 +23,7 @@
             case "view":
                 document.title = "web.ts - View";
                 //get Template from an element on Page(web ts css class makes the element hidden)
-                class example implements web.ts.View<string> {
+                class example implements WebView<string> {
                     public apply(text: string) {
                         document.getElementById("content").innerHTML = text;
                     };
@@ -31,7 +31,7 @@
                 break;
             case "list":
                 document.title = "web.ts - List";
-                class List extends web.ts.List<string>{
+                class List extends WebList<string>{
                     public add(item: string, i?: number) {
                         var elm = getElement(document.getElementById("element"));
                         elm.innerText = item;
@@ -88,18 +88,18 @@
     document.getElementsByTagName('head')[0].appendChild(style);
 
     /*** Library ***/
-    export abstract class Page {
+    export abstract class WebDocument{
         constructor() {
             this.load();
         }
         protected abstract view(): string;//Contains the page location or elements# to get template from and what to do while loading is taking place
-        protected abstract render(doc: Document): void;//Callback when the template is downloaded and sent for user to render as desired.
+        protected abstract result(doc: Document): void;//Callback when the template is downloaded and sent for user to render as desired.
         //Loading Function
         private load() {
             var view: string = this.view();
             if (view != null && view.length > 1 && view[0] != "#") {
                 var xhttp = new XMLHttpRequest();
-                xhttp.onload = () => this.render(TextToDocument(xhttp.responseText));
+                xhttp.onload = () => this.result(TextToDocument(xhttp.responseText));
                 xhttp.open(view.lastIndexOf("?")<0 && view.lastIndexOf(".") > view.lastIndexOf("/")?"GET":"POST", view, true);
                 xhttp.send();
             }
@@ -109,12 +109,12 @@
         return <Document>(new DOMParser().parseFromString(text, "text/html"));
     }
 
-    export interface  View<T> {
+    export interface  WebView<T> {
         //Application method to apply work on the view
         apply(item: T);
     }
 
-    export abstract class List< T > {
+    export abstract class WebList< T > {
         abstract add(item: T, i: number): void;
         abstract remove(item: T, i: number): void;
         abstract reset(): void;

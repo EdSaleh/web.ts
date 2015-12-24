@@ -16,7 +16,6 @@
                     }
                     //how to render document method
                     protected render(doc: Document) {
-                        document.title = "Index";
                         document.getElementById("content").innerHTML = getElement(doc).innerText;
                     };
                 } (new Index());
@@ -66,6 +65,7 @@
             code
         */
     }
+
     //Assign main() to Events
     window.onload = function () {
         main();

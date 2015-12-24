@@ -31,7 +31,6 @@ var web;
                         };
                         //how to render document method
                         Index.prototype.render = function (doc) {
-                            document.title = "Index";
                             document.getElementById("content").innerHTML = getElement(doc).innerText;
                         };
                         ;

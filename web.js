@@ -29,6 +29,7 @@ var web;
                         };
                         //how to render document method
                         Index.prototype.result = function (doc) {
+                            alert(JSON.stringify(hashArgs()));
                             document.getElementById("content").innerHTML = getElement(doc).outerHTML;
                         };
                         ;
@@ -105,8 +106,6 @@ var web;
                     elms[i].onclick = function () {
                         var href = "#" + this.href.substr(this.href.lastIndexOf("#") + 1);
                         if ("#" + hashCommand() == href) {
-                            //if (href.length > 0 && href[0] != "#" && href.indexOf(".") > 0)
-                            //    href = "/#!/" + href.substr(0, href.indexOf("."))
                             window.location.href = href;
                             main();
                             return false;
@@ -122,14 +121,22 @@ var web;
         style.innerHTML = '.web.ts { display: none; }';
         document.getElementsByTagName('head')[0].appendChild(style);
         function hashCommand() {
-            var path = (window.location.href.substr(window.location.href.lastIndexOf("#") + 1));
-            var pathIndxSlash = path.indexOf("/"), pathIndxQuestion = path.indexOf("?");
-            var hashCommand = path.substr(0, pathIndxSlash < pathIndxQuestion && pathIndxSlash > 0 ? pathIndxSlash : (pathIndxQuestion < pathIndxSlash && pathIndxQuestion > 0 ? pathIndxQuestion : path.length));
+            var hpath = window.location.href.indexOf("#") >= 0 ? (window.location.href.substr(window.location.href.indexOf("#") + 1)) : "";
+            var argStartIndx = hpath.substr(0, 2) == "!/" ? hpath.replace("?", "/").substr(2).indexOf("/") : hpath.replace("?", "/").indexOf("/") - 2;
+            var hashCommand = hpath.substring(0, argStartIndx > 0 ? argStartIndx + 2 : hpath.length);
             return hashCommand;
         }
         function hashArgs() {
-            var hash = (window.location.href.substr(window.location.href.lastIndexOf("#") + 1));
-            return hash.indexOf("?") >= 0 ? hash.substr(hash.indexOf("?") + 1) : hash.substr(hash.indexOf("/") + 1);
+            var args = hashCommand() != "" ? window.location.href.substr(window.location.href.indexOf("#")).replace("#" + hashCommand(), "") : "";
+            if (args.length > 0)
+                args = args.substr(1).replace("/", "=");
+            var pairs = args.split('&');
+            var result = {};
+            pairs.forEach(function (pair) {
+                var kv = pair.split('=');
+                result[kv[0]] = decodeURIComponent(kv[1] || '');
+            });
+            return JSON.parse(JSON.stringify(result));
         }
         /*** Library ***/
         var WebDocument = (function () {

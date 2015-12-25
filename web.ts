@@ -54,7 +54,7 @@
                         document.getElementById("content").innerHTML = "";
                     }
                 }
-                var list = new List(); //Do the operation
+                var list = new List();
                 document.getElementById("content").innerHTML = "";
                 var strs = ["click on any item to remove", "a", "b", "c"];
                 list.addRange(strs);

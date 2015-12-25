@@ -12,9 +12,7 @@ var web;
                 code
              */
             //code for pages
-            var path = (window.location.href.substr(window.location.href.lastIndexOf("#") + 1));
-            var pathIndxSlash = path.indexOf("/"), pathIndxQuestion = path.indexOf("?");
-            switch (path.substr(0, pathIndxSlash < pathIndxQuestion && pathIndxSlash > 0 ? pathIndxSlash : (pathIndxQuestion < pathIndxSlash && pathIndxQuestion > 0 ? pathIndxQuestion : path.length))) {
+            switch (hashCommand()) {
                 case "":
                 case "!/Index":
                 case "!/Page":
@@ -99,16 +97,19 @@ var web;
         //Assign main() to Events
         window.onload = function () {
             main();
+            onhashchange = main;
             var elms = document.getElementsByTagName("a");
             for (var i = 0; i < elms.length; i++) {
                 if (elms[i].classList.contains("web")) {
                     elms[i].onclick = function () {
-                        var href = this.href.substr(this.href.lastIndexOf("/") + 1);
-                        if (href.length > 0 && href[0] != "#" && href.indexOf(".") > 0)
-                            href = "/#!/" + href.substr(0, href.indexOf("."));
-                        window.location.href = href;
-                        main();
-                        return false;
+                        var href = "#" + this.href.substr(this.href.lastIndexOf("#") + 1);
+                        if ("#" + hashCommand() == href) {
+                            //if (href.length > 0 && href[0] != "#" && href.indexOf(".") > 0)
+                            //    href = "/#!/" + href.substr(0, href.indexOf("."))
+                            window.location.href = href;
+                            main();
+                            return false;
+                        }
                     };
                 }
             }
@@ -119,6 +120,12 @@ var web;
         style.type = 'text/css';
         style.innerHTML = '.web.ts { display: none; }';
         document.getElementsByTagName('head')[0].appendChild(style);
+        function hashCommand() {
+            var path = (window.location.href.substr(window.location.href.lastIndexOf("#") + 1));
+            var pathIndxSlash = path.indexOf("/"), pathIndxQuestion = path.indexOf("?");
+            var hashCommand = path.substr(0, pathIndxSlash < pathIndxQuestion && pathIndxSlash > 0 ? pathIndxSlash : (pathIndxQuestion < pathIndxSlash && pathIndxQuestion > 0 ? pathIndxQuestion : path.length));
+            return hashCommand;
+        }
         /*** Library ***/
         var WebDocument = (function () {
             function WebDocument() {

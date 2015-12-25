@@ -38,10 +38,10 @@ var web;
                     break;
                 case "view":
                     document.title = "web.ts - View";
-                    //get Template from an element on Page(web ts css class makes the element hidden)
                     var example = (function () {
                         function example() {
                         }
+                        //apply string on an element
                         example.prototype.apply = function (text) {
                             document.getElementById("content").innerHTML = text;
                         };
@@ -59,6 +59,7 @@ var web;
                         }
                         List.prototype.add = function (item, i) {
                             var _this = this;
+                            //get Template from an element on Page(web ts css class makes the element hidden)
                             var elm = getElement(document.getElementById("element"));
                             elm.innerText = item;
                             elm.onclick = function () { return _this.remove(item); };

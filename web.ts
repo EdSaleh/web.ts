@@ -24,8 +24,8 @@
                 break;
             case "view":
                 document.title = "web.ts - View";
-                //get Template from an element on Page(web ts css class makes the element hidden)
                 class example implements WebView<string> {
+                //apply string on an element
                     public apply(text: string) {
                         document.getElementById("content").innerHTML = text;
                     };
@@ -35,6 +35,7 @@
                 document.title = "web.ts - List";
                 class List extends WebList<string>{
                     public add(item: string, i?: number) {
+                        //get Template from an element on Page(web ts css class makes the element hidden)
                         var elm = getElement(document.getElementById("element"));
                         elm.innerText = item;
                         elm.onclick = () => this.remove(item);

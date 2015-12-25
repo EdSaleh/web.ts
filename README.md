@@ -6,7 +6,7 @@ web.ts is designed to make web design better using Object Oriented programing an
 ##main() Method:
 Allows to execute or create components using hash-link anchors when navigating. 
 Cases can be chosen based on specific hash command with format #hash-command[ /?]args...
-History and same hash navigation is supported. for SEO, it's encouraged to use hashbang format (/#!/Page) for links.
+History and same hash navigation is supported.
 ##WebView Component:
 Download a document from the Internet and use it in your page. 
 This component has two methods:-

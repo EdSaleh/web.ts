@@ -17,7 +17,7 @@ Contains apply(item:T) method to use on a specific area on your page document.
 It's a list component with methods such as add/remove(item:T, I?:number), reset(), and length():number that will need to be implemented to create a functional list. addRange(items:T[], I?:number) is already implemented and will use implementation of add() method internally. More methods can be added or creating a constructor if desired to the extending class.
 ##main() Method:
 Allows to execute or create components using hash-link anchors when navigating. 
-Cases can be chosen based on specific hash command with format #hash-command[/?](args...)
+Cases can be chosen based on specific hash command with format #hash-command[/?] (args...)
 You use hashCommand():string and hashArgs():Object to get the command and the arguments.
 
 [Open Source Project Website Link](https://github.com/medozs/web.ts)

@@ -6,12 +6,13 @@ web.ts is designed to make web design better using Object Oriented programing an
 ##main() Method:
 Allows to execute or create components using hash-link anchors when navigating. 
 Cases can be chosen based on specific hash command with format #hash-command[ /?]args...
+History and same hash navigation is supported. for SEO, it's encouraged to use hashbang format (/#!/Page).
 ##WebView Component:
 Download a document from the Internet and use it in your page. 
 This component has two methods:-
 view(): contains the location of the document to be downloaded. If you location last word after “/” contains a “.” Ex: /file.txt it will do a get request, else or it contains a “?” Or ends with “/” it will do a post request.
 result(doc:Document): callback with the do omens when it’s finished downloading.
-getElement(doc) method takes first div clone in the document; getElement(elm) removes "ts" class and id from clone. for SEO, it's encouraged to use hashbang format (/#!/Page)
+getElement(doc) method takes first div clone in the document; getElement(elm) removes "ts" class and id from clone.
 ##WebView<T> Interface Component:
 Contains apply(item:T) method to use on a specific area on your page document.
 ##WebList<T> Component:

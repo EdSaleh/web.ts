@@ -1,7 +1,8 @@
 #web.ts
 Create Web Apps using Object Oriented MVC architecture.
 
-web.ts is designed to make web design better using Object Oriented programing and MVC architecture where is there separation between Views(HTML/CSS) and Controller(.ts classes) in Typescript to create native OO and asynchronous(AJAX) apps. Due to the separation, views can be easily designed using Interactive Web Design softwares such as Visual Studio WebForm Designer and the Controllers are Typescript classes extending WebDocument, WebList or implementing WebView. The framework uses TypeScript and easy to learn.
+web.ts is designed to make web design better using Object Oriented programing and MVC architecture where is there separation between Views(HTML/CSS) and Controller(.ts classes) in Typescript to create native OO and asynchronous(AJAX) apps. 
+Due to the separation, views can be easily designed using Interactive Web Design softwares such as Visual Studio WebForm Designer and the Controllers are Typescript classes extending WebDocument, WebList or implementing WebView. The framework uses TypeScript and easy to learn.
 
 ##main() Method:
 Allows to execute or create components using hash-link anchors when navigating. 
@@ -11,7 +12,7 @@ History and same hash navigation is supported.
 Download a document from the Internet and use it in your page. 
 This component has two methods:-
 view(): contains the location of the document to be downloaded. If you location last word after “/” contains a “.” Ex: /file.txt it will do a get request, else or it contains a “?” Or ends with “/” it will do a post request.
-result(doc:Document): callback with the do omens when it’s finished downloading.
+result(doc:Document): callback with the docuoment when it’s finished downloading.
 getElement(doc) method takes first div clone in the document; getElement(elm) removes "ts" class and id from clone.
 ##WebView<T> Interface Component:
 Contains apply(item:T) method to use on a specific area on your page document.

@@ -102,6 +102,11 @@
         return hashCommand;
     }
 
+    function hashArgs(): string {
+        var hash = (window.location.href.substr(window.location.href.lastIndexOf("#") + 1));
+        return hash.indexOf("?") >= 0 ? hash.substr(hash.indexOf("?") + 1) : hash.substr(hash.indexOf("/") + 1) 
+    }
+
     /*** Library ***/
     export abstract class WebDocument{
         constructor() {

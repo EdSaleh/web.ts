@@ -126,6 +126,10 @@ var web;
             var hashCommand = path.substr(0, pathIndxSlash < pathIndxQuestion && pathIndxSlash > 0 ? pathIndxSlash : (pathIndxQuestion < pathIndxSlash && pathIndxQuestion > 0 ? pathIndxQuestion : path.length));
             return hashCommand;
         }
+        function hashArgs() {
+            var hash = (window.location.href.substr(window.location.href.lastIndexOf("#") + 1));
+            return hash.indexOf("?") >= 0 ? hash.substr(hash.indexOf("?") + 1) : hash.substr(hash.indexOf("/") + 1);
+        }
         /*** Library ***/
         var WebDocument = (function () {
             function WebDocument() {

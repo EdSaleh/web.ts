@@ -18,5 +18,6 @@ It's a list component with methods such as add/remove(item:T, I?:number), reset(
 ##main() Method:
 Allows to execute or create components using hash-link anchors when navigating. 
 Cases can be chosen based on specific hash command with format #hash-command[/?](args...)
+You use hashCommand():string and hashArgs():Object to get the command and the arguments.
 
 [Open Source Project Website Link](https://github.com/medozs/web.ts)

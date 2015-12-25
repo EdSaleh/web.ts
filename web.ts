@@ -17,7 +17,6 @@
                     }
                     //how to render document method
                     protected result(doc: Document) {
-                        alert(JSON.stringify( hashArgs()))
                         document.getElementById("content").innerHTML = getElement(doc).outerHTML;
                     };
                 }
@@ -95,14 +94,14 @@
     style.innerHTML = '.web.ts { display: none; }';
     document.getElementsByTagName('head')[0].appendChild(style);
 
-    function hashCommand(): string {
+    export function hashCommand(): string {
         var hpath: string = window.location.href.indexOf("#") >= 0 ? (window.location.href.substr(window.location.href.indexOf("#") + 1)) : "";
         var argStartIndx = hpath.substr(0, 2) == "!/" ? hpath.replace("?", "/").substr(2).indexOf("/") : hpath.replace("?", "/").indexOf("/") - 2;
         var hashCommand = hpath.substring(0, argStartIndx > 0 ? argStartIndx +2: hpath.length);
         return hashCommand;
     }
 
-    function hashArgs(): Object {
+    export function hashArgs(): Object {
         var args = hashCommand() != "" ? window.location.href.substr(window.location.href.indexOf("#")).replace("#" + hashCommand(), "") : "";
         if (args.length > 0) args = args.substr(1).replace("/", "=");
         var pairs = args.split('&');

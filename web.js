@@ -29,7 +29,6 @@ var web;
                         };
                         //how to render document method
                         Index.prototype.result = function (doc) {
-                            alert(JSON.stringify(hashArgs()));
                             document.getElementById("content").innerHTML = getElement(doc).outerHTML;
                         };
                         ;
@@ -126,6 +125,7 @@ var web;
             var hashCommand = hpath.substring(0, argStartIndx > 0 ? argStartIndx + 2 : hpath.length);
             return hashCommand;
         }
+        ts.hashCommand = hashCommand;
         function hashArgs() {
             var args = hashCommand() != "" ? window.location.href.substr(window.location.href.indexOf("#")).replace("#" + hashCommand(), "") : "";
             if (args.length > 0)
@@ -138,6 +138,7 @@ var web;
             });
             return JSON.parse(JSON.stringify(result));
         }
+        ts.hashArgs = hashArgs;
         /*** Library ***/
         var WebDocument = (function () {
             function WebDocument() {

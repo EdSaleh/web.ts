@@ -1,7 +1,7 @@
 #web.ts
 Create Web Apps using Object Oriented MVC architecture.
 
-web.ts is designed to make web design better using Object Oriented programing and MVC architecture where is there separation between Views(HTML/CSS) and Controller(.ts classes) in Typescript to create native OO and asynchronous(AJAX) apps. Hence, due to separation, Views are designed using Interactive Web Design softwares such as Visual Studio WebForm Designer and the Controllers are Typescript classes extending WebDocument, WebList or implementing WebView. The framework uses TypeScript and easy to learn.
+web.ts is designed to make web design better using Object Oriented programing and MVC architecture where is there separation between Views(HTML/CSS) and Controller(.ts classes) in Typescript to create native OO and asynchronous(AJAX) apps. Due to the separation, views can be easily designed using Interactive Web Design softwares such as Visual Studio WebForm Designer and the Controllers are Typescript classes extending WebDocument, WebList or implementing WebView. The framework uses TypeScript and easy to learn.
 
 ##main() Method:
 Allows to execute or create components using hash-link anchors when navigating. 

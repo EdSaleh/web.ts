@@ -15,9 +15,9 @@ getElement(doc) method takes first div clone in the document; getElement(elm) re
 Contains apply(item:T) method to use on a specific area on your page document.
 ##WebList<T> Component:
 It's a list component with methods such as add/remove(item:T, I?:number), reset(), and length():number that will need to be implemented to create a functional list. addRange(items:T[], I?:number) is already implemented and will use implementation of add() method internally. More methods can be added or creating a constructor if desired to the extending class.
-##main() Method:
-* Allows to execute or create components using hash-link anchors when navigating. 
-* Cases can be chosen based on specific hash command with format #hash-command[/?]args..
+##General:
+* main() Method: Allows to execute or create components using hash-link anchors when navigating,
+Switch cases can be assigned based on specific hash command with format #hash-command[/?]args..
 * You use hashCommand():string and hashArgs():Object to get the command and the arguments.
 * .web.ts elements are hidden elements.
 * a.web are specialized web.ts hash-links

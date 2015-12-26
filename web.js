@@ -115,7 +115,7 @@ var web;
                             return false;
                         }
                     };
-                    if (elm.href.indexOf("#") < 0)
+                    if (elm.href.indexOf("#") < 0) {
                         elm.onmousedown = function () {
                             var thelm = this;
                             var webhref = thelm.getAttribute("webhref");
@@ -126,6 +126,9 @@ var web;
                             //else {thelm.setAttribute("href", webhref); }
                             thelm.onmousedown = null;
                         };
+                        if (elm.classList.contains("load"))
+                            elm.onmousedown.apply(elm);
+                    }
                 }
             }
         };

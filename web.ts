@@ -89,7 +89,7 @@ module web.ts {
                         return false;
                     }
                 }
-                if (elm.href.indexOf("#") < 0)
+                if (elm.href.indexOf("#") < 0) {
                     elm.onmousedown = function () {
                         var thelm = <HTMLAnchorElement>this;
                         var webhref = thelm.getAttribute("webhref");
@@ -98,6 +98,8 @@ module web.ts {
                         //else {thelm.setAttribute("href", webhref); }
                         thelm.onmousedown = null;
                     }
+                    if (elm.classList.contains("load"))elm.onmousedown.apply(elm);
+                }
             }
         }
     }

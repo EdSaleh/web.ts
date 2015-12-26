@@ -109,7 +109,7 @@ var web;
                     elm.onclick = function () {
                         var thelm = this;
                         var href = "#" + thelm.href.substr(thelm.href.lastIndexOf("#") + 1);
-                        if ("#" + hashCommand() == href) {
+                        if ("#" + hashCommand() == href || !("onhashchange" in window)) {
                             window.location.href = href;
                             main();
                             return false;
@@ -204,7 +204,8 @@ var web;
         }
         ts.getElement = getElement;
         //ajax get resource
-        function get(url, callback, timeout, timeoutcallback, type, async) {
+        function get(url, callback, data, timeout, timeoutcallback, type, async) {
+            if (data === void 0) { data = null; }
             if (timeout === void 0) { timeout = 4000; }
             if (timeoutcallback === void 0) { timeoutcallback = function () { }; }
             if (type === void 0) { type = "GET"; }
@@ -214,7 +215,7 @@ var web;
             xhttp.timeout = timeout;
             xhttp.ontimeout = timeoutcallback();
             xhttp.open(type, url, async);
-            xhttp.send();
+            xhttp.send(data);
         }
         ts.get = get;
     })(ts = web.ts || (web.ts = {}));

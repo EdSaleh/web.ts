@@ -83,7 +83,7 @@ module web.ts {
                 elm.onclick = function () {
                     var thelm = <HTMLAnchorElement>this;
                     var href = "#" + thelm.href.substr(thelm.href.lastIndexOf("#") + 1);
-                    if ("#"+hashCommand() == href) {
+                    if ("#" + hashCommand() == href || !("onhashchange" in window)) {
                         window.location.href = href;
                         main();
                         return false;
@@ -180,12 +180,12 @@ module web.ts {
         }
     }
     //ajax get resource
-    export function get(url: string, callback: Function, timeout: number = 4000, timeoutcallback: Function = () => { }, type: string = "GET", async: boolean = true): void {
+    export function get(url: string, callback: Function, data: string | Document|any=null, timeout: number = 4000, timeoutcallback: Function = () => { }, type: string = "GET", async: boolean = true): void {
         var xhttp = new XMLHttpRequest();
         xhttp.onload = callback();
         xhttp.timeout = timeout;
         xhttp.ontimeout = timeoutcallback();
         xhttp.open(type, url, async);
-        xhttp.send();
+        xhttp.send(data);
     }
 }

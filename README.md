@@ -9,7 +9,7 @@ History and same hash navigation is supported.
 Download a document from the Internet and use it in your page. 
 This component has two methods:-
 view(): contains the location of the document to be downloaded. If you location last word after “/” contains a “.” Ex: /file.txt it will do a get request, else or it contains a “?” Or ends with “/” it will do a post request.
-result(doc:Document): callback with the docuoment when it’s finished downloading.
+result(doc:Document): callback with the document when it’s finished downloading.
 getElement(doc) method takes first div clone in the document; getElement(elm) removes "ts" class and id from clone.
 ##WebView<T> Interface Component:
 Contains apply(item:T) method to use on a specific area on your page document.

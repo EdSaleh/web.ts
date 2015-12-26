@@ -20,6 +20,6 @@ It's a list component with methods such as add/remove(item:T, I?:number), reset(
 * Cases can be chosen based on specific hash command with format #hash-command[/?]args..
 * You use hashCommand():string and hashArgs():Object to get the command and the arguments.
 * .web.ts elements are hidden elements.
-* a.web are specialized web.ts hash-links - anchors not including "#" in [href] will converted by prepending [href] with /#!/[href removing extensions.] ex: href="Page.html" will be converted to href="/#!/Page" automaticaly. If attribute [webhref] is found, it will be used for the conversion.
+* a.web are specialized web.ts hash-links - anchors not including "#" in [href] will converted by prepending [href] with /#!/[href removing extensions.] ex: href="Page.html" will be converted to href="/#!/Page" automaticaly at onmousedown event once. If attribute [webhref] is found, it will be used for the conversion.
 
 [Open Source Project Website Link](https://github.com/medozs/web.ts)

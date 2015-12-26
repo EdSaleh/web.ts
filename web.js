@@ -28,7 +28,6 @@ var web;
                         }
                         //view page for action
                         Index.prototype.view = function () {
-                            alert(JSON.stringify(hashArgs()));
                             return "/Page.html";
                         };
                         //how to render document method

@@ -16,7 +16,6 @@ module web.ts {
                 class Index extends WebDocument {
                     //view page for action
                     protected view(): string {
-                        alert(JSON.stringify(hashArgs()));
                         return "/Page.html";
                     }
                     //how to render document method

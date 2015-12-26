@@ -1,4 +1,7 @@
-﻿module web.ts {
+﻿/**
+* @preserve web.ts | @medozs | MIT/GPL2 Licensed | Open Source at github.com/medozs/web.ts
+*/
+module web.ts {
     function main(): void {
         /* 
             code
@@ -13,6 +16,7 @@
                 class Index extends WebDocument {
                     //view page for action
                     protected view(): string {
+                        alert(JSON.stringify(hashArgs()));
                         return "/Page.html";
                     }
                     //how to render document method
@@ -75,15 +79,25 @@
         onhashchange = main;
         var elms = document.getElementsByTagName("a");
         for (var i = 0; i < elms.length; i++) {
-            if ((<HTMLAnchorElement>elms[i]).classList.contains("web")) {
-                (<HTMLAnchorElement>elms[i]).onclick = function () {
-                    var href = "#"+(<HTMLAnchorElement>this).href.substr((<HTMLAnchorElement>this).href.lastIndexOf("#") + 1);
+            var elm = (<HTMLAnchorElement>elms[i]);
+            if (elm.classList.contains("web")) {
+                elm.onclick = function () {
+                    var thelm = <HTMLAnchorElement>this;
+                    var href = "#" + thelm.href.substr(thelm.href.lastIndexOf("#") + 1);
                     if ("#"+hashCommand() == href) {
                         window.location.href = href;
                         main();
                         return false;
                     }
                 }
+                if (elm.href.indexOf("#") < 0)
+                    elm.onmousedown = function () {
+                        var thelm = <HTMLAnchorElement>this;
+                        var webhref = thelm.getAttribute("webhref");
+                        if (webhref == "" || webhref == null) { thelm.setAttribute("href", "#!/" + thelm.getAttribute("href").replace(/((https?:\/\/[\w\_\-\d\.]+)?\/?)?/g, "").replace(/(^(\/)*)?/g, "").replace(/(\.\w*(?=[\/\?]?))?/g, "")); }
+                        else {thelm.setAttribute("href", webhref); }
+                        thelm.onmousedown = null;
+                    }
             }
         }
     }
@@ -95,10 +109,8 @@
     document.getElementsByTagName('head')[0].appendChild(style);
 
     export function hashCommand(): string {
-        var hpath: string = window.location.href.indexOf("#") >= 0 ? (window.location.href.substr(window.location.href.indexOf("#") + 1)) : "";
-        var argStartIndx = hpath.substr(0, 2) == "!/" ? hpath.replace("?", "/").substr(2).indexOf("/") : hpath.replace("?", "/").indexOf("/") - 2;
-        var hashCommand = hpath.substring(0, argStartIndx > 0 ? argStartIndx +2: hpath.length);
-        return hashCommand;
+        var hashComArr = window.location.href.match(/(#(\!(\/)?)?[\w\_\-\d\.]+)/);
+        return hashComArr != null? hashComArr[0].substr(hashComArr[0].indexOf("#") + 1):"";
     }
 
     export function hashArgs(): Object {

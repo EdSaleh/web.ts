@@ -3,6 +3,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+/**
+* @preserve web.ts | @medozs | MIT/GPL2 Licensed | Open Source at github.com/medozs/web.ts
+*/
 var web;
 (function (web) {
     var ts;
@@ -25,6 +28,7 @@ var web;
                         }
                         //view page for action
                         Index.prototype.view = function () {
+                            alert(JSON.stringify(hashArgs()));
                             return "/Page.html";
                         };
                         //how to render document method
@@ -101,15 +105,29 @@ var web;
             onhashchange = main;
             var elms = document.getElementsByTagName("a");
             for (var i = 0; i < elms.length; i++) {
-                if (elms[i].classList.contains("web")) {
-                    elms[i].onclick = function () {
-                        var href = "#" + this.href.substr(this.href.lastIndexOf("#") + 1);
+                var elm = elms[i];
+                if (elm.classList.contains("web")) {
+                    elm.onclick = function () {
+                        var thelm = this;
+                        var href = "#" + thelm.href.substr(thelm.href.lastIndexOf("#") + 1);
                         if ("#" + hashCommand() == href) {
                             window.location.href = href;
                             main();
                             return false;
                         }
                     };
+                    if (elm.href.indexOf("#") < 0)
+                        elm.onmousedown = function () {
+                            var thelm = this;
+                            var webhref = thelm.getAttribute("webhref");
+                            if (webhref == "" || webhref == null) {
+                                thelm.setAttribute("href", "#!/" + thelm.getAttribute("href").replace(/((https?:\/\/[\w\_\-\d\.]+)?\/?)?/g, "").replace(/(^(\/)*)?/g, "").replace(/(\.\w*(?=[\/\?]?))?/g, ""));
+                            }
+                            else {
+                                thelm.setAttribute("href", webhref);
+                            }
+                            thelm.onmousedown = null;
+                        };
                 }
             }
         };
@@ -120,10 +138,8 @@ var web;
         style.innerHTML = '.web.ts { display: none; }';
         document.getElementsByTagName('head')[0].appendChild(style);
         function hashCommand() {
-            var hpath = window.location.href.indexOf("#") >= 0 ? (window.location.href.substr(window.location.href.indexOf("#") + 1)) : "";
-            var argStartIndx = hpath.substr(0, 2) == "!/" ? hpath.replace("?", "/").substr(2).indexOf("/") : hpath.replace("?", "/").indexOf("/") - 2;
-            var hashCommand = hpath.substring(0, argStartIndx > 0 ? argStartIndx + 2 : hpath.length);
-            return hashCommand;
+            var hashComArr = window.location.href.match(/(#(\!(\/)?)?[\w\_\-\d\.]+)/);
+            return hashComArr != null ? hashComArr[0].substr(hashComArr[0].indexOf("#") + 1) : "";
         }
         ts.hashCommand = hashCommand;
         function hashArgs() {

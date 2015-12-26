@@ -1,1 +1,1 @@
-Free open source project.
+web.ts | @medozs | MIT/GPL2 Licensed | Open Source at github.com/medozs/web.ts

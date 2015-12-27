@@ -32,7 +32,7 @@ var web;
                         };
                         //how to render document method
                         Index.prototype.result = function (doc) {
-                            document.getElementById("content").innerHTML = getElement(doc).outerHTML;
+                            document.getElementById("content").innerHTML = getElement(doc).outerHTML + "<br/>" + new Date().toLocaleString();
                         };
                         ;
                         return Index;
@@ -108,27 +108,29 @@ var web;
                 if (elm.classList.contains("web")) {
                     elm.onclick = function () {
                         var thelm = this;
-                        var href = "#" + thelm.href.substr(thelm.href.lastIndexOf("#") + 1);
-                        if (("#" + hashCommand()) == href ||
-                            href.indexOf("#" + hashCommand() + "?") == 0 ||
-                            href.indexOf("#" + hashCommand() + "/") == 0 ||
-                            !("onhashchange" in window)) {
-                            window.location.href = href;
-                            main();
-                            return false;
-                        }
-                        else if (thelm.getAttribute("href").indexOf("#") < 0) {
+                        if (thelm.getAttribute("href").indexOf("#") < 0) {
                             var webhref = thelm.getAttribute("webhref");
-                            if (webhref == "" || webhref == null) {
-                                window.open("#!/" + thelm.getAttribute("href").replace(/((https?:\/\/[\w\_:\-\d\.]+)?\/?)/g, "").replace(/(\.\w*(?=[\/\?]?))/g, ""), "_self");
-                            }
-                            else {
+                            if (webhref == "" || webhref == null)
+                                webhref = thelm.getAttribute("href").replace(/((https?:\/\/[\w\_:\-\d\.]+)?\/?)/g, "").replace(/(\.\w*(?=[\/\?]?))/g, "");
+                            if (!sameHash(webhref))
                                 window.open(webhref, "_self");
-                            }
                             return false;
                         }
+                        else if (sameHash("#" + thelm.getAttribute("href").substr(thelm.getAttribute("href").lastIndexOf("#") + 1)))
+                            return false;
                     };
                 }
+            }
+            //Checks if the link is the same as the current hash, if yes, it performs main() and returns true, else false
+            function sameHash(href) {
+                if (("#" + hashCommand()) == href ||
+                    href.indexOf("#" + hashCommand() + "?") == 0 ||
+                    href.indexOf("#" + hashCommand() + "/") == 0 ||
+                    !("onhashchange" in window)) {
+                    main();
+                    return true;
+                }
+                return false;
             }
         };
         /*** web.ts libraries ***/

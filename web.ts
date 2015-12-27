@@ -96,9 +96,9 @@ module web.ts {
                     elm.onmousedown = function () {
                         var thelm = <HTMLAnchorElement>this;
                         var webhref = thelm.getAttribute("webhref");
-                        //if (webhref == "" || webhref == null)
+                        if (webhref == "" || webhref == null)
                         { thelm.setAttribute("href", "#!/" + thelm.getAttribute("href").replace(/((https?:\/\/[\w\_:\-\d\.]+)?\/?)/g, "").replace(/(\.\w*(?=[\/\?]?))/g, "")); }
-                        //else {thelm.setAttribute("href", webhref); }
+                        else {thelm.setAttribute("href", webhref); }
                         thelm.onmousedown = null;
                     }
                     if (elm.classList.contains("load"))elm.onmousedown.apply(elm);

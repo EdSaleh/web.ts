@@ -28,7 +28,7 @@ module web.ts {
             case "view":
                 document.title = "web.ts - View";
                 class example implements WebView<string> {
-                //apply string on an element
+                    //apply string on an element
                     public apply(text: string) {
                         document.getElementById("content").innerHTML = text;
                     };
@@ -84,24 +84,19 @@ module web.ts {
                     var thelm = <HTMLAnchorElement>this;
                     var href = "#" + thelm.href.substr(thelm.href.lastIndexOf("#") + 1);
                     if (("#" + hashCommand()) == href ||
-                        href.indexOf("#" + hashCommand()+"?") == 0 ||
+                        href.indexOf("#" + hashCommand() + "?") == 0 ||
                         href.indexOf("#" + hashCommand() + "/") == 0 ||
                         !("onhashchange" in window)) {
                         window.location.href = href;
                         main();
                         return false;
-                    }
-                }
-                if (elm.href.indexOf("#") < 0) {
-                    elm.onmousedown = function () {
-                        var thelm = <HTMLAnchorElement>this;
+                    } else if (thelm.getAttribute("href").indexOf("#") < 0) {
                         var webhref = thelm.getAttribute("webhref");
                         if (webhref == "" || webhref == null)
-                        { thelm.setAttribute("href", "#!/" + thelm.getAttribute("href").replace(/((https?:\/\/[\w\_:\-\d\.]+)?\/?)/g, "").replace(/(\.\w*(?=[\/\?]?))/g, "")); }
-                        else {thelm.setAttribute("href", webhref); }
-                        thelm.onmousedown = null;
+                        { window.open("#!/" + thelm.getAttribute("href").replace(/((https?:\/\/[\w\_:\-\d\.]+)?\/?)/g, "").replace(/(\.\w*(?=[\/\?]?))/g, ""), "_self"); }
+                        else { window.open(webhref, "_self"); }
+                        return false;
                     }
-                    if (elm.classList.contains("load"))elm.onmousedown.apply(elm);
                 }
             }
         }
@@ -127,18 +122,18 @@ module web.ts {
     export function hashArgs(): Object {
         var hCom = hashCommand();
         var args = hCom != "" ? window.location.hash.replace("#" + hCom, "") : "";
-        if (args.length > 0) args = args.substr(1).replace("/", "=");      
+        if (args.length > 0) args = args.substr(1).replace("/", "=");
         var pairs = args.split('&');
         var result = {};
         pairs.forEach(function (pair) {
-            var kv =  pair.split('=');
+            var kv = pair.split('=');
             result[kv[0]] = decodeURIComponent(kv[1] || '');
         });
         return JSON.parse(JSON.stringify(result));
     }
 
     /*** Library ***/
-    export abstract class WebDocument{
+    export abstract class WebDocument {
         constructor() {
             this.load();
         }
@@ -150,7 +145,7 @@ module web.ts {
             if (view != null && view.length > 1 && view[0] != "#") {
                 var xhttp = new XMLHttpRequest();
                 xhttp.onload = () => this.result(TextToDocument(xhttp.responseText));
-                xhttp.open(view.lastIndexOf("?")<0 && view.lastIndexOf(".") > view.lastIndexOf("/")?"GET":"POST", view, true);
+                xhttp.open(view.lastIndexOf("?") < 0 && view.lastIndexOf(".") > view.lastIndexOf("/") ? "GET" : "POST", view, true);
                 xhttp.send();
             }
         }
@@ -159,20 +154,20 @@ module web.ts {
         return <Document>(new DOMParser().parseFromString(text, "text/html"));
     }
 
-    export interface  WebView<T> {
+    export interface WebView<T> {
         //Application method to apply work on the view
         apply(item: T);
     }
 
-    export abstract class WebList< T > {
+    export abstract class WebList<T> {
         abstract add(item: T, i: number): void;
         abstract remove(item: T, i: number): void;
         abstract reset(): void;
         abstract length(): number;
         //Start List Item Function
         public addRange(items: T[], i: number = this.length()): void {
-            for (var indx = 0; indx < items.length;indx++) {
-                this.add(<T>items[indx],i+indx);
+            for (var indx = 0; indx < items.length; indx++) {
+                this.add(<T>items[indx], i + indx);
             }
         }
     }
@@ -182,7 +177,7 @@ module web.ts {
         if (edoc.nodeName.toLowerCase() === "#document") {
             return (<HTMLElement>((<Document>edoc).getElementsByTagName("div")[0].cloneNode(true)));
         }
-        else{
+        else {
             var elm: HTMLElement = <HTMLElement>((<HTMLElement>edoc).cloneNode(true));
             elm.classList.remove("ts");
             elm.id = "";
@@ -190,7 +185,7 @@ module web.ts {
         }
     }
     //ajax get resource
-    export function get(url: string, callback: Function, data: string | Document|any=null, timeout: number = 4000, timeoutcallback: Function = () => { }, type: string = "GET", async: boolean = true): void {
+    export function get(url: string, callback: Function, data: string | Document | any = null, timeout: number = 4000, timeoutcallback: Function = () => { }, type: string = "GET", async: boolean = true): void {
         var xhttp = new XMLHttpRequest();
         xhttp.onload = callback();
         xhttp.timeout = timeout;

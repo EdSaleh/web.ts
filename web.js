@@ -117,22 +117,17 @@ var web;
                             main();
                             return false;
                         }
-                    };
-                    if (elm.href.indexOf("#") < 0) {
-                        elm.onmousedown = function () {
-                            var thelm = this;
+                        else if (thelm.getAttribute("href").indexOf("#") < 0) {
                             var webhref = thelm.getAttribute("webhref");
                             if (webhref == "" || webhref == null) {
-                                thelm.setAttribute("href", "#!/" + thelm.getAttribute("href").replace(/((https?:\/\/[\w\_:\-\d\.]+)?\/?)/g, "").replace(/(\.\w*(?=[\/\?]?))/g, ""));
+                                window.open("#!/" + thelm.getAttribute("href").replace(/((https?:\/\/[\w\_:\-\d\.]+)?\/?)/g, "").replace(/(\.\w*(?=[\/\?]?))/g, ""), "_self");
                             }
                             else {
-                                thelm.setAttribute("href", webhref);
+                                window.open(webhref, "_self");
                             }
-                            thelm.onmousedown = null;
-                        };
-                        if (elm.classList.contains("load"))
-                            elm.onmousedown.apply(elm);
-                    }
+                            return false;
+                        }
+                    };
                 }
             }
         };

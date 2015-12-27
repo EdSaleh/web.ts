@@ -83,7 +83,10 @@ module web.ts {
                 elm.onclick = function () {
                     var thelm = <HTMLAnchorElement>this;
                     var href = "#" + thelm.href.substr(thelm.href.lastIndexOf("#") + 1);
-                    if ("#" + hashCommand() == href || !("onhashchange" in window)) {
+                    if (("#" + hashCommand()) == href ||
+                        href.indexOf("#" + hashCommand()+"?") == 0 ||
+                        href.indexOf("#" + hashCommand() + "/") == 0 ||
+                        !("onhashchange" in window)) {
                         window.location.href = href;
                         main();
                         return false;
@@ -110,14 +113,21 @@ module web.ts {
     style.innerHTML = '.web.ts { display: none; }';
     document.getElementsByTagName('head')[0].appendChild(style);
 
+    export function hashFile(): string {
+        return window.location.pathname;
+    }
+
     export function hashCommand(): string {
-        var hashComArr = window.location.href.match(/(#(\!(\/)?)?[\w\_\-\d\.]+)/);
-        return hashComArr != null? hashComArr[0].substr(hashComArr[0].indexOf("#") + 1):"";
+        var hashComEnd = window.location.hash.indexOf("?") - 1;
+        if (hashComEnd < 0) hashComEnd = window.location.hash.indexOf("/", window.location.hash.indexOf("#!/") >= 0 ? window.location.hash.indexOf("#!/") + 3 : (window.location.hash.indexOf("#/") >= 0 ? window.location.hash.indexOf("#/") + 2 : 0)) - 1;
+        if (hashComEnd < 0) hashComEnd = window.location.hash.length;
+        return window.location.hash.substr(window.location.hash.indexOf("#") + 1, hashComEnd);
     }
 
     export function hashArgs(): Object {
-        var args = hashCommand() != "" ? window.location.href.substr(window.location.href.indexOf("#")).replace("#" + hashCommand(), "") : "";
-        if (args.length > 0) args = args.substr(1).replace("/", "=");
+        var hCom = hashCommand();
+        var args = hCom != "" ? window.location.hash.replace("#" + hCom, "") : "";
+        if (args.length > 0) args = args.substr(1).replace("/", "=");      
         var pairs = args.split('&');
         var result = {};
         pairs.forEach(function (pair) {

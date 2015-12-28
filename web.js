@@ -87,7 +87,6 @@ var web;
                         return List;
                     })(WebList);
                     var list = new List();
-                    document.getElementById("content").innerHTML = "";
                     var strs = ["click on any item to remove", "a", "b", "c"];
                     list.addRange(strs);
                     list.add("d");
@@ -190,6 +189,7 @@ var web;
         }
         var WebList = (function () {
             function WebList() {
+                this.reset();
             }
             //Start List Item Function
             WebList.prototype.addRange = function (items, i) {

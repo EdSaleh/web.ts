@@ -24,6 +24,7 @@ module web.ts {
                     };
                 }
                 (new Index());
+
                 break;
             case "view":
                 document.title = "web.ts - View";
@@ -59,7 +60,6 @@ module web.ts {
                     }
                 }
                 var list = new List();
-                document.getElementById("content").innerHTML = "";
                 var strs = ["click on any item to remove", "a", "b", "c"];
                 list.addRange(strs);
                 list.add("d");
@@ -161,6 +161,7 @@ module web.ts {
     }
 
     export abstract class WebList<T> {
+        constructor() { this.reset(); }
         abstract add(item: T, i: number): void;
         abstract remove(item: T, i: number): void;
         abstract reset(): void;

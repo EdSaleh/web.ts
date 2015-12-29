@@ -133,6 +133,16 @@ module web.ts {
         return JSON.parse(JSON.stringify(result));
     }
 
+    export function createQueryString(obj: Object): string {
+        var str = [];
+        for (var p in obj) {
+            if (obj.hasOwnProperty(p)) {
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            }
+        }
+        return str.join("&");
+    }
+
     /*** Library ***/
     export abstract class WebDocument {
         constructor() {
@@ -173,7 +183,6 @@ module web.ts {
             }
         }
     }
-
 
     export function getElement(edoc: Document | HTMLElement): HTMLElement {
         if (edoc.nodeName.toLowerCase() === "#document") {

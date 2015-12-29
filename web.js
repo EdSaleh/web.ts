@@ -165,6 +165,16 @@ var web;
             return JSON.parse(JSON.stringify(result));
         }
         ts.hashArgs = hashArgs;
+        function createQueryString(obj) {
+            var str = [];
+            for (var p in obj) {
+                if (obj.hasOwnProperty(p)) {
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                }
+            }
+            return str.join("&");
+        }
+        ts.createQueryString = createQueryString;
         /*** Library ***/
         var WebDocument = (function () {
             function WebDocument() {

@@ -5,7 +5,7 @@ web.ts is designed to make web design better using Object Oriented programing an
 Due to the separation, views can be easily designed using Interactive Web Design softwares such as Visual Studio WebForm Designer and the Controllers are Typescript classes extending WebDocument, WebList or implementing WebView. The framework uses TypeScript and easy to learn.
 History and same hash navigation is supported.
 
-##WebView Component:
+##WebDocument Component:
 Download a document from the Internet and use it in your page. 
 This component has two methods:-
 view(): contains the location of the document to be downloaded. If you location last word after “/” contains a “.” Ex: /file.txt it will do a get request, else or it contains a “?” Or ends with “/” it will do a post request.

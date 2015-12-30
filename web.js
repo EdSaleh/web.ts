@@ -165,6 +165,7 @@ var web;
             return JSON.parse(JSON.stringify(result));
         }
         ts.hashArgs = hashArgs;
+        //create Query String from object
         function createQueryString(obj) {
             var str = [];
             for (var p in obj) {

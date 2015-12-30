@@ -132,7 +132,7 @@ module web.ts {
         });
         return JSON.parse(JSON.stringify(result));
     }
-
+    //create Query String from object
     export function createQueryString(obj: Object): string {
         var str = [];
         for (var p in obj) {

@@ -30,6 +30,17 @@
 Due to the separation, views can be easily designed using Interactive Web Design softwares such as Visual Studio WebForm Designer and the Controllers are Typescript classes extending WebDocument, WebList or implementing WebView. The framework uses TypeScript and easy to learn.
 History and same hash navigation is supported.</p>
 
+                <div>
+            <h2>
+<a id="example" class="anchor" href="#general" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example:</h2>
+    <a id="PageTab" class="web" href="Page.html?arg" webhref="#!/Page">Index</a>
+    <a id="viewTab" class="web" href="#view">Element</a>
+    <a id="listTab" class="web" href="#list">List</a>
+    <div id="content" style="height:200px;"></div>
+    <div class ="web ts"id="element">This Element is part of the document but was hidden using "web ts" class. 
+    the list cloned "#element" you use for items and the class and the id were striped</div>
+        </div>
+
 <h2>
 <a id="webview-component" class="anchor" href="#webview-component" aria-hidden="true"><span class="octicon octicon-link"></span></a>WebView Component:</h2>
 
@@ -61,16 +72,7 @@ Switch cases can be assigned based on specific hash command with format #hash-co
 <li>a.web are specialized web.ts hash-links - anchors not including "#" in [href] will converted to Hijax links, making this link navigate to /#!/[href(no extensions)] ex: href="Page.html" automatically or use [webhref] as navigation link if found.</li>
 </ul>
 
-        <div>
-            <h2>
-<a id="example" class="anchor" href="#general" aria-hidden="true"><span class="octicon octicon-link"></span></a>Web.ts Example:</h2>
-    <a id="Page" class="web" href="Page.html?arg" webhref="#!/Page">Index</a>
-    <a id="view" class="web" href="#view">Element</a>
-    <a id="list" class="web" href="#list">List</a>
-    <div id="content"></div>
-    <div class ="web ts"id="element">This Element is part of the document but was hidden using "web ts" class. 
-    the list cloned "#element" you use for items and the class and the id were striped</div>
-        </div>
+
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/medozs/web.ts">Web.ts</a> is maintained by <a href="https://github.com/medozs">medozs</a>.</span>

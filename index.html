@@ -1,20 +1,75 @@
-﻿<!-- Layout Page -->
 <!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Web.ts by medozs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Web.ts</h1>
+      <h2 class="project-tagline">Create Web Apps using Object Oriented MVC architecture.</h2>
+      <a href="https://github.com/medozs/web.ts" class="btn">View on GitHub</a>
+      <a href="https://github.com/medozs/web.ts/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/medozs/web.ts/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>web.ts</title>
-    <script src="web.js"></script>
-</head>
-<body>
-    <h1>Web.ts</h1>
-    <a id="Page" class="web" href="Page.html?arg" webhref="#!/Page">Index</a>
-    <a id="view" class="web" href="#view">Element</a>
-    <a id="list" class="web" href="#list">List</a>
-    <div id="content"></div>
-    <div class ="web ts"id="element">This Element is part of the document but was hidden using "web ts" class. 
-    the list cloned "#element" you use for items and the class and the id were striped</div>
+    <section class="main-content">
+      <h1>
+<a id="webts" class="anchor" href="#webts" aria-hidden="true"><span class="octicon octicon-link"></span></a>web.ts</h1>
 
-</body>
+<p>Create Web Apps using Object Oriented MVC architecture.</p>
+
+<p>web.ts is designed to make web design better using Object Oriented programing and MVC architecture where is there separation between Views(HTML/CSS) and Controller(.ts classes) in Typescript to create native OO and asynchronous(AJAX) apps. 
+Due to the separation, views can be easily designed using Interactive Web Design softwares such as Visual Studio WebForm Designer and the Controllers are Typescript classes extending WebDocument, WebList or implementing WebView. The framework uses TypeScript and easy to learn.
+History and same hash navigation is supported.</p>
+
+<h2>
+<a id="webview-component" class="anchor" href="#webview-component" aria-hidden="true"><span class="octicon octicon-link"></span></a>WebView Component:</h2>
+
+<p>Download a document from the Internet and use it in your page. 
+This component has two methods:-
+view(): contains the location of the document to be downloaded. If you location last word after “/” contains a “.” Ex: /file.txt it will do a get request, else or it contains a “?” Or ends with “/” it will do a post request.
+result(doc:Document): callback with the document when it’s finished downloading.
+getElement(doc) method takes first div clone in the document.</p>
+
+<h2>
+<a id="webview-interface-component" class="anchor" href="#webview-interface-component" aria-hidden="true"><span class="octicon octicon-link"></span></a>WebView Interface Component:</h2>
+
+<p>Contains apply(item:T) method to use on a specific area on your page document. getElement(elm) removes "ts" class and id from clone, displaying it.</p>
+
+<h2>
+<a id="weblist-component" class="anchor" href="#weblist-component" aria-hidden="true"><span class="octicon octicon-link"></span></a>WebList Component:</h2>
+
+<p>It's a list component with methods such as add/remove(item:T, I?:number), reset(), and length():number that will need to be implemented to create a functional list. addRange(items:T[], I?:number) is already implemented and will use implementation of add() method internally. More methods can be added or creating a constructor if desired to the extending class.</p>
+
+<h2>
+<a id="general" class="anchor" href="#general" aria-hidden="true"><span class="octicon octicon-link"></span></a>General:</h2>
+
+<ul>
+<li>main() Method: Allows to execute or create components using hash-link anchors when navigating,
+Switch cases can be assigned based on specific hash command with format #hash-command[/?]args..</li>
+<li>You use hashCommand():string, hashArgs():Object to get the command and the arguments, hashFile():string to get the file path before hash and createQueryString(Object):string to create querystring from a JSON object.</li>
+<li>.web.ts elements are hidden elements.</li>
+<li>a.web are specialized web.ts hash-links - anchors not including "#" in [href] will converted to Hijax links, making this link navigate to /#!/[href(no extensions)] ex: href="Page.html" automatically or use [webhref] as navigation link if found.</li>
+</ul>
+
+<p><a href="https://github.com/medozs/web.ts">Open Source Project Website Link</a></p>
+
+<p><a href="http://medozs.github.io/web.ts/">Example</a></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/medozs/web.ts">Web.ts</a> is maintained by <a href="https://github.com/medozs">medozs</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
 </html>

@@ -12,11 +12,11 @@ module web.ts {
             case "!/Index":
             case "!/Page":
             default:
-                document.title = "web.ts - Page" ;
+                document.title = "web.ts - Page";
                 class Index extends WebDocument {
                     //view page for action
                     protected view(): string {
-                        return "/Page.html";
+                        return "./Page.html";
                     }
                     //how to render document method
                     protected result(doc: Document) {

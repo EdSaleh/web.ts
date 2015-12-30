@@ -23,4 +23,5 @@ Switch cases can be assigned based on specific hash command with format #hash-co
 * a.web are specialized web.ts hash-links - anchors not including "#" in [href] will converted to Hijax links, making this link navigate to /#!/[href(no extensions)] ex: href="Page.html" automatically or use [webhref] as navigation link if found.
 
 [Open Source Project Website Link](https://github.com/medozs/web.ts)
+
 [Example](http://medozs.github.io/web.ts/)

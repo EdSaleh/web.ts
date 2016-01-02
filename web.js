@@ -97,6 +97,7 @@ var web;
                 code
             */
         }
+        //******* web.ts library ************//
         //Assign main() to Events
         window.onload = function () {
             main();
@@ -132,11 +133,11 @@ var web;
                 return false;
             }
         };
-        /*** web.ts libraries ***/
+        /*** web.ts components ***/
         //Hide Templates
         var style = document.createElement('style');
         style.type = 'text/css';
-        style.innerHTML = '.web.ts { display: none; }';
+        style.innerHTML = '.web.ts { display: none; clear:both; }';
         document.getElementsByTagName('head')[0].appendChild(style);
         function hashFile() {
             return window.location.pathname;

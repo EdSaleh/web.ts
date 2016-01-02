@@ -83,12 +83,12 @@ module web.ts {
             if (elm.classList.contains("web")) {
                 elm.onclick = function () {
                     var thelm = <HTMLAnchorElement>this;
-                    if (thelm.getAttribute("href").indexOf("#") < 0) {
-                        var webhref = thelm.getAttribute("webhref");
+                    var webhref = thelm.getAttribute("webhref");
+                    if (thelm.getAttribute("href").indexOf("#") < 0 || webhref + "" != "") {
                         if (webhref == "" || webhref == null) webhref = thelm.getAttribute("href").replace(/((https?:\/\/[\w\_:\-\d\.]+)?\/?)/g, "").replace(/(\.\w*(?=[\/\?]?))/g, "");
                         if (!sameHash(webhref)) window.open(webhref, "_self");
                         return false;
-                    } else if (sameHash("#"+thelm.getAttribute("href").substr(thelm.getAttribute("href").lastIndexOf("#") + 1))) return false;
+                    } else if (sameHash("#" + thelm.getAttribute("href").substr(thelm.getAttribute("href").lastIndexOf("#") + 1))) return false;
                 }
             }
         }

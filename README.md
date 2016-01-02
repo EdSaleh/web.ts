@@ -20,6 +20,7 @@ It's a list component with methods such as add/remove(item:T, I?:number), reset(
 Switch cases can be assigned based on specific hash command with format #hash-command[/?]args..
 * You use hashCommand():string, hashArgs():Object to get the command and the arguments, hashFile():string to get the file path before hash and createQueryString(Object):string to create querystring from a JSON object.
 * .web.ts elements are hidden elements.
+* [webhref] in a.web is an alternative link to use instead of [href]. could be used for SEO and alternative navigation.
 * a.web are specialized web.ts hash-links - anchors not including "#" in [href] will converted to Hijax links, making this link navigate to /#!/[href(no extensions)] ex: href="Page.html" automatically or use [webhref] as navigation link if found.
 
 [Main Page](http://medozs.github.io/web.ts/)

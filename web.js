@@ -15,7 +15,7 @@ var web;
                 code
              */
             //code for pages
-            switch (hashCommand()) {
+            switch (command()) {
                 case "":
                 case "!/Index":
                 case "!/Page":
@@ -93,6 +93,7 @@ var web;
                     list.remove(null, 2);
                     break;
             }
+            alert(command() + " " + JSON.stringify(args()));
             /*
                 code
             */
@@ -101,36 +102,41 @@ var web;
         //Assign main() to Events
         window.onload = function () {
             main();
-            onhashchange = main;
             var elms = document.getElementsByTagName("a");
-            for (var i = 0; i < elms.length; i++) {
-                var elm = elms[i];
-                if (elm.classList.contains("web")) {
-                    elm.onclick = function () {
-                        var thelm = this;
-                        var webhref = thelm.getAttribute("webhref");
-                        if (thelm.getAttribute("href").indexOf("#") < 0 || webhref + "" != "") {
-                            if (webhref == "" || webhref == null)
-                                webhref = thelm.getAttribute("href").replace(/((https?:\/\/[\w\_:\-\d\.]+)?\/?)/g, "").replace(/(\.\w*(?=[\/\?]?))/g, "");
-                            if (!sameHash(webhref))
-                                window.open(webhref, "_self");
+            if (history.pushState) {
+                onpopstate = main;
+                for (var i = 0; i < elms.length; i++) {
+                    var elm = elms[i];
+                    if (elm.classList.contains("web")) {
+                        elm.onclick = function () {
+                            var thelm = this;
+                            if (window.location.pathname + window.location.search + window.location.hash != (thelm.getAttribute("href").charAt(0) != "/" ? "/" : "") + thelm.getAttribute("href")) {
+                                history.pushState("", document.title, thelm.getAttribute("href"));
+                                main();
+                                history.replaceState("", document.title, thelm.getAttribute("href"));
+                            }
+                            else
+                                main();
                             return false;
-                        }
-                        else if (sameHash("#" + thelm.getAttribute("href").substr(thelm.getAttribute("href").lastIndexOf("#") + 1)))
-                            return false;
-                    };
+                        };
+                    }
                 }
             }
-            //Checks if the link is the same as the current hash, if yes, it performs main() and returns true, else false
-            function sameHash(href) {
-                if (("#" + hashCommand()) == href ||
-                    href.indexOf("#" + hashCommand() + "?") == 0 ||
-                    href.indexOf("#" + hashCommand() + "/") == 0 ||
-                    !("onhashchange" in window)) {
-                    main();
-                    return true;
+            else if (window.onhashchange) {
+                onhashchange = main;
+                for (var i = 0; i < elms.length; i++) {
+                    var elm = elms[i];
+                    if (elm.classList.contains("web")) {
+                        elm.onclick = function () {
+                            var thelm = this;
+                            if (window.location.hash != "#" + thelm.getAttribute("href"))
+                                window.open("#" + thelm.getAttribute("href"));
+                            else
+                                main();
+                            return false;
+                        };
+                    }
                 }
-                return false;
             }
         };
         /*** web.ts components ***/
@@ -139,24 +145,18 @@ var web;
         style.type = 'text/css';
         style.innerHTML = '.web.ts { display: none; clear:both; }';
         document.getElementsByTagName('head')[0].appendChild(style);
-        function hashFile() {
-            return window.location.pathname;
+        function command() {
+            return window.location.hash + "" != "" ? window.location.hash.replace("?", "/").replace("#/", "#!/").substr(window.location.hash.replace("#/", "#!/").indexOf("!/") + 2).split("/")[0] : window.location.pathname.substr(1).split("/")[0];
         }
-        ts.hashFile = hashFile;
-        function hashCommand() {
-            var hashComEnd = window.location.hash.indexOf("?") - 1;
-            if (hashComEnd < 0)
-                hashComEnd = window.location.hash.indexOf("/", window.location.hash.indexOf("#!/") >= 0 ? window.location.hash.indexOf("#!/") + 3 : (window.location.hash.indexOf("#/") >= 0 ? window.location.hash.indexOf("#/") + 2 : 0)) - 1;
-            if (hashComEnd < 0)
-                hashComEnd = window.location.hash.length;
-            return window.location.hash.substr(window.location.hash.indexOf("#") + 1, hashComEnd);
-        }
-        ts.hashCommand = hashCommand;
-        function hashArgs() {
-            var hCom = hashCommand();
-            var args = hCom != "" ? window.location.hash.replace("#" + hCom, "") : "";
+        ts.command = command;
+        function args() {
+            var args = "";
+            if (window.location.hash + "" != "")
+                args = window.location.hash.replace("#/", "#!/").substr(window.location.hash.replace("#/", "#!/").indexOf("!/") + 2).split("?")[(window.location.hash + "").indexOf("?") < 0 ? 0 : 1];
+            else
+                args = ((window.location.search + "" != "") ? window.location.search : window.location.pathname).substr(1);
             if (args.length > 0)
-                args = args.substr(1).replace("/", "=");
+                args = args.replace("/", "=");
             var pairs = args.split('&');
             var result = {};
             pairs.forEach(function (pair) {
@@ -165,7 +165,7 @@ var web;
             });
             return JSON.parse(JSON.stringify(result));
         }
-        ts.hashArgs = hashArgs;
+        ts.args = args;
         //create Query String from object
         function createQueryString(obj) {
             var str = [];

@@ -67,7 +67,6 @@ module web.ts {
                 break;
             //************End Change*******************
         }
-        alert(command() + " " + JSON.stringify( args()));
         /*
             code
         */
@@ -85,17 +84,17 @@ module web.ts {
                 if (elm.classList.contains("web")) {
                     elm.onclick = function () {
                         var thelm = <HTMLAnchorElement>this;
-                        if (window.location.pathname + window.location.search + window.location.hash != (thelm.getAttribute("href").charAt(0) != "/"?"/":"")+ thelm.getAttribute("href")) {
-                            history.pushState("", document.title, thelm.getAttribute("href"));
+                        if (window.location.pathname + window.location.search + window.location.hash != (thelm.getAttribute("href").charAt(0) != "/" ? "/" : "") + thelm.getAttribute("href")) {
+                            history.pushState("", document.title, ((thelm.getAttribute("href") + "").charAt(0)!="/"?"/":"")+ thelm.getAttribute("href"));
                             main();
-                            history.replaceState("", document.title, thelm.getAttribute("href"));
+                            history.replaceState("", document.title, ((thelm.getAttribute("href") + "").charAt(0) != "/" ? "/" : "") +thelm.getAttribute("href"));
                         } else main();
                         return false;
                     }
                 }
             }
         }
-        else if (window.onhashchange) {
+        else if ('onhashchange' in window || window.onhashchange) {
             onhashchange = main;
             for (var i = 0; i < elms.length; i++) {
                 var elm = (<HTMLAnchorElement>elms[i]);
@@ -103,7 +102,7 @@ module web.ts {
                     elm.onclick = function () {
                         var thelm = <HTMLAnchorElement>this;
                         if (window.location.hash != "#" + thelm.getAttribute("href"))
-                            window.open("#" + thelm.getAttribute("href"));
+                            window.open("#" + thelm.getAttribute("href"),"_self");
                         else main();
                         return false;
                     }

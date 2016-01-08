@@ -109,10 +109,6 @@ module web.ts {
                 }
             }
         }
-        
-        
-
-        
     }
     /*** web.ts components ***/
     //Hide Templates

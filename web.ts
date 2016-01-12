@@ -9,6 +9,7 @@ module web.ts {
         //code for pages
         switch (command()) {
             case "":
+            case "Page":
             case "!/Index":
             case "!/Page":
             default:

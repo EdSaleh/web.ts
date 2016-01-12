@@ -184,6 +184,7 @@ var web;
             function WebDocument() {
                 this.load();
             }
+            WebDocument.prototype.view = function () { return command(); }; //Contains the page location or elements# to get template from and what to do while loading is taking place
             //Loading Function
             WebDocument.prototype.load = function () {
                 var _this = this;

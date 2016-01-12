@@ -152,7 +152,7 @@ module web.ts {
         constructor() {
             this.load();
         }
-        protected abstract view(): string;//Contains the page location or elements# to get template from and what to do while loading is taking place
+        protected view(): string { return command(); }//Contains the page location or elements# to get template from and what to do while loading is taking place
         protected abstract result(doc: Document): void;//Callback when the template is downloaded and sent for user to render as desired.
         //Loading Function
         private load() {

@@ -17,6 +17,7 @@ module web.ts {
                 class Index extends WebDocument {
                     //view page for action
                     protected view(): string {
+                        if (document.location.host.split(":")[0] == "localhost") return "/Page.html"; 
                         return "/web.ts/Page.html";
                     }
                     //how to render document method

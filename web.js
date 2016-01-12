@@ -29,6 +29,8 @@ var web;
                         }
                         //view page for action
                         Index.prototype.view = function () {
+                            if (document.location.host.split(":")[0] == "localhost")
+                                return "/Page.html";
                             return "/web.ts/Page.html";
                         };
                         //how to render document method

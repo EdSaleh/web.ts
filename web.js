@@ -29,7 +29,7 @@ var web;
                         }
                         //view page for action
                         Index.prototype.view = function () {
-                            return "./Page.html";
+                            return "/web.ts/Page.html";
                         };
                         //how to render document method
                         Index.prototype.result = function (doc) {

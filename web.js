@@ -42,20 +42,6 @@ var web;
                     })(WebDocument);
                     (new Index());
                     break;
-                case "view":
-                    document.title = "web.ts - View";
-                    var example = (function () {
-                        function example() {
-                        }
-                        //apply string on an element
-                        example.prototype.apply = function (text) {
-                            document.getElementById("content").innerHTML = text;
-                        };
-                        ;
-                        return example;
-                    })();
-                    (new example()).apply(new Date().toLocaleString());
-                    break;
                 case "list":
                     document.title = "web.ts - List";
                     var List = (function (_super) {

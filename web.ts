@@ -28,15 +28,6 @@ module web.ts {
                 (new Index());
 
                 break;
-            case "view":
-                document.title = "web.ts - View";
-                class example implements WebView<string> {
-                    //apply string on an element
-                    public apply(text: string) {
-                        document.getElementById("content").innerHTML = text;
-                    };
-                } (new example()).apply(new Date().toLocaleString());
-                break;
             case "list":
                 document.title = "web.ts - List";
                 class List extends WebList<string>{

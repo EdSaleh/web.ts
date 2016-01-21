@@ -9,6 +9,7 @@ module web.ts {
         //code for pages
         switch (command()) {
             case "":
+            case "index.html":
             case "Page.html":
             case "!/Index":
             case "!/Page":
@@ -16,13 +17,10 @@ module web.ts {
                 document.title = "web.ts - Page";
                 class Index extends WebDocument {
                     //view page for action
-                    protected view(): string {
-                        if (document.location.host.split(":")[0] == "localhost") return "/Page.html"; 
-                        return "/web.ts/Page.html";
-                    }
+ 
                     //how to render document method
                     protected result(doc: Document) {
-                        document.getElementById("content").innerHTML = getElement(doc).outerHTML + "<br/>" + new Date().toLocaleString();
+                        document.getElementById("content").innerHTML = doc.getElementById("content").innerHTML;
                     };
                 }
                 (new Index());
@@ -55,7 +53,7 @@ module web.ts {
                 var list = new List();
                 var strs = ["click on any item to remove", "a", "b", "c"];
                 list.addRange(strs);
-                list.add("d");
+                list.add(new Date().toLocaleString());
                 list.remove(null, 2);
                 break;
             //************End Change*******************
@@ -148,10 +146,10 @@ module web.ts {
         //Loading Function
         private load() {
             var view: string = this.view();
-            if (view != null && view.length > 1 && view[0] != "#") {
+            if (view != null ) {
                 var xhttp = new XMLHttpRequest();
                 xhttp.onload = () => this.result(TextToDocument(xhttp.responseText));
-                xhttp.open(view.lastIndexOf("?") < 0 && view.lastIndexOf(".") > view.lastIndexOf("/") ? "GET" : "POST", view, true);
+                xhttp.open(view.length<=1 ||(view.lastIndexOf("?") < 0 && view.lastIndexOf(".") > view.lastIndexOf("/")) ? "GET" : "POST", view, true);
                 xhttp.send();
             }
         }

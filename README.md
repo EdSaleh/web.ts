@@ -9,7 +9,7 @@ Same-link click and access actions is supported.
 ##WebDocument Component:
 Download a document from the Internet and use it in your page. 
 This component has two methods:-
-optional view(): contains the location of the document to be downloaded(default is command(), but can be overloaded). If you location last word after “/” contains a “.” Ex: /file.txt it will do a get request, else or it contains a “?” Or ends with “/” it will do a post request.
+optional view(): contains the location of the document to be downloaded(default is command(), but can be overloaded but not recommended since command() should be matching the view location). If you location last word after “/” contains a “.” Ex: /file.txt it will do a get request, else or it contains a “?” Or ends with “/” it will do a post request.
 result(doc:Document): callback with the document when it’s finished downloading.
 getElement(doc) method takes first div clone in the document.
 ##WebList<T> Component:

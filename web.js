@@ -17,6 +17,7 @@ var web;
             //code for pages
             switch (command()) {
                 case "":
+                case "index.html":
                 case "Page.html":
                 case "!/Index":
                 case "!/Page":
@@ -28,14 +29,9 @@ var web;
                             _super.apply(this, arguments);
                         }
                         //view page for action
-                        Index.prototype.view = function () {
-                            if (document.location.host.split(":")[0] == "localhost")
-                                return "/Page.html";
-                            return "/web.ts/Page.html";
-                        };
                         //how to render document method
                         Index.prototype.result = function (doc) {
-                            document.getElementById("content").innerHTML = getElement(doc).outerHTML + "<br/>" + new Date().toLocaleString();
+                            document.getElementById("content").innerHTML = doc.getElementById("content").innerHTML;
                         };
                         ;
                         return Index;
@@ -78,7 +74,7 @@ var web;
                     var list = new List();
                     var strs = ["click on any item to remove", "a", "b", "c"];
                     list.addRange(strs);
-                    list.add("d");
+                    list.add(new Date().toLocaleString());
                     list.remove(null, 2);
                     break;
             }
@@ -175,10 +171,10 @@ var web;
             WebDocument.prototype.load = function () {
                 var _this = this;
                 var view = this.view();
-                if (view != null && view.length > 1 && view[0] != "#") {
+                if (view != null) {
                     var xhttp = new XMLHttpRequest();
                     xhttp.onload = function () { return _this.result(TextToDocument(xhttp.responseText)); };
-                    xhttp.open(view.lastIndexOf("?") < 0 && view.lastIndexOf(".") > view.lastIndexOf("/") ? "GET" : "POST", view, true);
+                    xhttp.open(view.length <= 1 || (view.lastIndexOf("?") < 0 && view.lastIndexOf(".") > view.lastIndexOf("/")) ? "GET" : "POST", view, true);
                     xhttp.send();
                 }
             };

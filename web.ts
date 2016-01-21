@@ -19,7 +19,7 @@ module web.ts {
                     //view page for action
                     protected view(): string {
                         if (document.location.host.split(":")[0] == "localhost") return "/"; 
-                        return "/web.ts/";
+                        return "/web.ts/index.html";
                     }
                     //how to render document method
                     protected result(doc: Document) {

@@ -32,7 +32,7 @@ var web;
                         Index.prototype.view = function () {
                             if (document.location.host.split(":")[0] == "localhost")
                                 return "/";
-                            return "/web.ts/";
+                            return "/web.ts/index.html";
                         };
                         //how to render document method
                         Index.prototype.result = function (doc) {

@@ -29,6 +29,11 @@ var web;
                             _super.apply(this, arguments);
                         }
                         //view page for action
+                        Index.prototype.view = function () {
+                            if (document.location.host.split(":")[0] == "localhost")
+                                return "/";
+                            return "/web.ts/";
+                        };
                         //how to render document method
                         Index.prototype.result = function (doc) {
                             document.getElementById("content").innerHTML = doc.getElementById("content").innerHTML;

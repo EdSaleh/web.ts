@@ -17,7 +17,10 @@ module web.ts {
                 document.title = "web.ts - Page";
                 class Index extends WebDocument {
                     //view page for action
- 
+                    protected view(): string {
+                        if (document.location.host.split(":")[0] == "localhost") return "/"; 
+                        return "/web.ts/";
+                    }
                     //how to render document method
                     protected result(doc: Document) {
                         document.getElementById("content").innerHTML = doc.getElementById("content").innerHTML;

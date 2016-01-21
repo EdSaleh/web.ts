@@ -61,6 +61,7 @@ module web.ts {
                 break;
             //************End Change*******************
         }
+
         /*
             code
         */
@@ -117,8 +118,8 @@ module web.ts {
 
     export function args(): Object {
         var args = "";
-        if (window.location.hash + "" != "") args = window.location.hash.replace("#/", "#!/").substr(window.location.hash.replace("#/", "#!/").indexOf("!/") + 2).split("?")[(window.location.hash + "").indexOf("?")<0?0:1]; 
-        else args = ((window.location.search + "" != "") ? window.location.search : window.location.pathname).substr(1);
+        if (window.location.hash + "" != "") args = window.location.hash.replace("#/", "#!/").substr(window.location.hash.replace("#/", "#!/").indexOf("!/") + 2).split("?")[(window.location.hash + "").indexOf("?") < 0 ? 0 : 1];
+        else args = window.location.pathname.substr(1).replace("/", "=") + window.location.search.replace("?","&");
         if (args.length > 0) args = args.replace("/", "=");
         var pairs = args.split('&');
         var result = {};

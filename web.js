@@ -112,8 +112,10 @@ var web;
                     if (elm.classList.contains("web")) {
                         elm.onclick = function () {
                             var thelm = this;
-                            if (window.location.hash != "#" + thelm.getAttribute("href"))
-                                window.open("#" + thelm.getAttribute("href"), "_self");
+                            var href = (thelm.href + "").replace(window.location.protocol + "//", "");
+                            href = "#" + href.substring(href.indexOf("/") + 1);
+                            if (window.location.hash != href)
+                                window.open(href, "_self");
                             else
                                 main();
                             return false;
@@ -168,7 +170,7 @@ var web;
             //Loading Function
             WebDocument.prototype.load = function () {
                 var _this = this;
-                var view = window.location.href.replace("#!/", "").replace("#!", "").replace("#/", "").replace("#", "");
+                var view = window.location.hash != "" && window.location.hash.length > 0 ? window.location.href : window.location.hash.substring(1);
                 if (view != null) {
                     var xhttp = new XMLHttpRequest();
                     xhttp.onload = function () { return _this.result(TextToDocument(xhttp.responseText)); };
@@ -179,9 +181,6 @@ var web;
             return WebDocument;
         })();
         ts.WebDocument = WebDocument;
-        function TextToDocument(text) {
-            return (new DOMParser().parseFromString(text, "text/html"));
-        }
         var WebList = (function () {
             function WebList() {
                 this.reset();
@@ -196,6 +195,9 @@ var web;
             return WebList;
         })();
         ts.WebList = WebList;
+        function TextToDocument(text) {
+            return (new DOMParser().parseFromString(text, "text/html"));
+        }
         function getElement(edoc) {
             if (edoc.nodeName.toLowerCase() === "#document") {
                 return (edoc.getElementsByTagName("div")[0].cloneNode(true));

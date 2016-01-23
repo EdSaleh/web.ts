@@ -89,8 +89,9 @@ module web.ts {
                 if (elm.classList.contains("web")) {
                     elm.onclick = function () {
                         var thelm = <HTMLAnchorElement>this;
-                        if (window.location.hash != "#" + thelm.getAttribute("href"))
-                            window.open("#" + thelm.getAttribute("href"),"_self");
+                        var href = (thelm.href + "").replace(window.location.protocol + "//", ""); href="#"+href.substring(href.indexOf("/")+1);
+                        if (window.location.hash != href)
+                            window.open(href, "_self");
                         else main();
                         return false;
                     }
@@ -141,7 +142,7 @@ module web.ts {
         protected abstract result(doc: Document): void;//Callback when the template is downloaded and sent for user to render as desired.
         //Loading Function
         private load() {
-            var view: string = window.location.href.replace("#!/", "").replace("#!", "").replace("#/", "").replace("#", "");
+            var view: string = window.location.hash != "" && window.location.hash.length > 0 ? window.location.href : window.location.hash.substring(1);
             if (view != null ) {
                 var xhttp = new XMLHttpRequest();
                 xhttp.onload = () => this.result(TextToDocument(xhttp.responseText));
@@ -151,15 +152,7 @@ module web.ts {
         }
     }
 
-    function TextToDocument(text: string): Document {
-        return <Document>(new DOMParser().parseFromString(text, "text/html"));
-    }
-
-    export interface WebView<T> {
-        //Application method to apply work on the view
-        apply(item: T);
-    }
-
+  
     export abstract class WebList<T> {
         constructor() { this.reset(); }
         abstract add(item: T, i: number): void;
@@ -172,6 +165,10 @@ module web.ts {
                 this.add(<T>items[indx], i + indx);
             }
         }
+    }
+
+    function TextToDocument(text: string): Document {
+        return <Document>(new DOMParser().parseFromString(text, "text/html"));
     }
 
     export function getElement(edoc: Document | HTMLElement): HTMLElement {

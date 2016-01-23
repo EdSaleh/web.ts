@@ -8,60 +8,53 @@ module web.ts {
          */
         //code for pages
         switch (command()) {
-            case "":
-            case "index.html":
-            case "Page.html":
-            case "!/Index":
-            case "!/Page":
+            case "web.ts":
             default:
-                document.title = "web.ts - Page";
-                class Index extends WebDocument {
-                    //view page for action
-                    protected view(): string {
-                        if (document.location.host.split(":")[0] == "localhost") return "/"; 
-                        return "/web.ts/index.html";
-                    }
-                    //how to render document method
-                    protected result(doc: Document) {
-                        document.getElementById("content").innerHTML = doc.getElementById("content").innerHTML;
-                    };
-                }
-                (new Index());
-
-                break;
-            case "list":
-                document.title = "web.ts - List";
-                class List extends WebList<string>{
-                    public add(item: string, i?: number) {
-                        //get Template from an element on Page(web ts css class makes the element hidden)
-                        var elm = getElement(document.getElementById("element"));
-                        elm.innerText = item;
-                        elm.onclick = () => this.remove(item);
-                        document.getElementById("content").appendChild(elm);
-                    }
-                    public remove(item: string, i: number = null) {
-                        if (item != null) {
-                            var elms = document.getElementById("content").children;
-                            for (var index = 0; index < elms.length; index++)
-                                if ((<HTMLDivElement>elms[index]).innerText == item) (<HTMLDivElement>elms[index]).remove();
-                        } else if (i != null) {
-                            document.getElementById("content").children[i].remove();
+                switch (args()["list"] != null) {
+                    case false:
+                        document.title = "web.ts - Page";
+                        class Index extends WebDocument {
+                            //how to render document method
+                            protected result(doc: Document) {
+                                document.getElementById("content").innerHTML = doc.getElementById("content").innerHTML;
+                            };
                         }
-                    }
-                    public length() { return null; }
-                    public reset() {
-                        document.getElementById("content").innerHTML = "";
-                    }
+                        (new Index());
+                        break;
+                    case true:
+                        document.title = "web.ts - List";
+                        class List extends WebList<string>{
+                            public add(item: string, i?: number) {
+                                //get Template from an element on Page(web ts css class makes the element hidden)
+                                var elm = getElement(document.getElementById("element"));
+                                elm.innerText = item;
+                                elm.onclick = () => this.remove(item);
+                                document.getElementById("content").appendChild(elm);
+                            }
+                            public remove(item: string, i: number = null) {
+                                if (item != null) {
+                                    var elms = document.getElementById("content").children;
+                                    for (var index = 0; index < elms.length; index++)
+                                        if ((<HTMLDivElement>elms[index]).innerText == item) (<HTMLDivElement>elms[index]).remove();
+                                } else if (i != null) {
+                                    document.getElementById("content").children[i].remove();
+                                }
+                            }
+                            public length() { return null; }
+                            public reset() {
+                                document.getElementById("content").innerHTML = "";
+                            }
+                        }
+                        var list = new List();
+                        var strs = ["click on any item to remove", "a", "b", "c"];
+                        list.addRange(strs);
+                        list.add(new Date().toLocaleString());
+                        list.remove(null, 2);
+                        break;
                 }
-                var list = new List();
-                var strs = ["click on any item to remove", "a", "b", "c"];
-                list.addRange(strs);
-                list.add(new Date().toLocaleString());
-                list.remove(null, 2);
                 break;
             //************End Change*******************
         }
-
         /*
             code
         */
@@ -145,11 +138,10 @@ module web.ts {
         constructor() {
             this.load();
         }
-        protected view(): string { return command(); }//Contains the page location or elements# to get template from and what to do while loading is taking place
         protected abstract result(doc: Document): void;//Callback when the template is downloaded and sent for user to render as desired.
         //Loading Function
         private load() {
-            var view: string = this.view();
+            var view: string = window.location.pathname + window.location.search;
             if (view != null ) {
                 var xhttp = new XMLHttpRequest();
                 xhttp.onload = () => this.result(TextToDocument(xhttp.responseText));
@@ -158,6 +150,7 @@ module web.ts {
             }
         }
     }
+
     function TextToDocument(text: string): Document {
         return <Document>(new DOMParser().parseFromString(text, "text/html"));
     }

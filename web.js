@@ -16,71 +16,65 @@ var web;
              */
             //code for pages
             switch (command()) {
-                case "":
-                case "index.html":
-                case "Page.html":
-                case "!/Index":
-                case "!/Page":
+                case "web.ts":
                 default:
-                    document.title = "web.ts - Page";
-                    var Index = (function (_super) {
-                        __extends(Index, _super);
-                        function Index() {
-                            _super.apply(this, arguments);
-                        }
-                        //view page for action
-                        Index.prototype.view = function () {
-                            if (document.location.host.split(":")[0] == "localhost")
-                                return "/";
-                            return "/web.ts/index.html";
-                        };
-                        //how to render document method
-                        Index.prototype.result = function (doc) {
-                            document.getElementById("content").innerHTML = doc.getElementById("content").innerHTML;
-                        };
-                        ;
-                        return Index;
-                    })(WebDocument);
-                    (new Index());
-                    break;
-                case "list":
-                    document.title = "web.ts - List";
-                    var List = (function (_super) {
-                        __extends(List, _super);
-                        function List() {
-                            _super.apply(this, arguments);
-                        }
-                        List.prototype.add = function (item, i) {
-                            var _this = this;
-                            //get Template from an element on Page(web ts css class makes the element hidden)
-                            var elm = getElement(document.getElementById("element"));
-                            elm.innerText = item;
-                            elm.onclick = function () { return _this.remove(item); };
-                            document.getElementById("content").appendChild(elm);
-                        };
-                        List.prototype.remove = function (item, i) {
-                            if (i === void 0) { i = null; }
-                            if (item != null) {
-                                var elms = document.getElementById("content").children;
-                                for (var index = 0; index < elms.length; index++)
-                                    if (elms[index].innerText == item)
-                                        elms[index].remove();
-                            }
-                            else if (i != null) {
-                                document.getElementById("content").children[i].remove();
-                            }
-                        };
-                        List.prototype.length = function () { return null; };
-                        List.prototype.reset = function () {
-                            document.getElementById("content").innerHTML = "";
-                        };
-                        return List;
-                    })(WebList);
-                    var list = new List();
-                    var strs = ["click on any item to remove", "a", "b", "c"];
-                    list.addRange(strs);
-                    list.add(new Date().toLocaleString());
-                    list.remove(null, 2);
+                    switch (args()["list"] != null) {
+                        case false:
+                            document.title = "web.ts - Page";
+                            var Index = (function (_super) {
+                                __extends(Index, _super);
+                                function Index() {
+                                    _super.apply(this, arguments);
+                                }
+                                //how to render document method
+                                Index.prototype.result = function (doc) {
+                                    document.getElementById("content").innerHTML = doc.getElementById("content").innerHTML;
+                                };
+                                ;
+                                return Index;
+                            })(WebDocument);
+                            (new Index());
+                            break;
+                        case true:
+                            document.title = "web.ts - List";
+                            var List = (function (_super) {
+                                __extends(List, _super);
+                                function List() {
+                                    _super.apply(this, arguments);
+                                }
+                                List.prototype.add = function (item, i) {
+                                    var _this = this;
+                                    //get Template from an element on Page(web ts css class makes the element hidden)
+                                    var elm = getElement(document.getElementById("element"));
+                                    elm.innerText = item;
+                                    elm.onclick = function () { return _this.remove(item); };
+                                    document.getElementById("content").appendChild(elm);
+                                };
+                                List.prototype.remove = function (item, i) {
+                                    if (i === void 0) { i = null; }
+                                    if (item != null) {
+                                        var elms = document.getElementById("content").children;
+                                        for (var index = 0; index < elms.length; index++)
+                                            if (elms[index].innerText == item)
+                                                elms[index].remove();
+                                    }
+                                    else if (i != null) {
+                                        document.getElementById("content").children[i].remove();
+                                    }
+                                };
+                                List.prototype.length = function () { return null; };
+                                List.prototype.reset = function () {
+                                    document.getElementById("content").innerHTML = "";
+                                };
+                                return List;
+                            })(WebList);
+                            var list = new List();
+                            var strs = ["click on any item to remove", "a", "b", "c"];
+                            list.addRange(strs);
+                            list.add(new Date().toLocaleString());
+                            list.remove(null, 2);
+                            break;
+                    }
                     break;
             }
             /*
@@ -171,11 +165,10 @@ var web;
             function WebDocument() {
                 this.load();
             }
-            WebDocument.prototype.view = function () { return command(); }; //Contains the page location or elements# to get template from and what to do while loading is taking place
             //Loading Function
             WebDocument.prototype.load = function () {
                 var _this = this;
-                var view = this.view();
+                var view = window.location.pathname + window.location.search;
                 if (view != null) {
                     var xhttp = new XMLHttpRequest();
                     xhttp.onload = function () { return _this.result(TextToDocument(xhttp.responseText)); };

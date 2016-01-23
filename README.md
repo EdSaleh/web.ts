@@ -7,10 +7,10 @@ In Addition to MVC architecture, It transforms Application to an SPA application
 Same-link click and access actions is supported.
 
 ##WebDocument Component:
-Download a document from the Internet and use it in your page. 
-This component has two methods:-
-optional view(): contains the location of the document to be downloaded(default is command(), but can be overloaded but not recommended since command() should be matching the view location). If you location last word after “/” contains a “.” Ex: /file.txt it will do a get request, else or it contains a “?” Or ends with “/” it will do a post request.
+Download url location document from the Internet and use it in your page. 
+This component has one method:-
 result(doc:Document): callback with the document when it’s finished downloading.
+Note: If you location last word after “/” contains a “.” Ex: /file.txt it will do a get request, else or it contains a “?” Or ends with “/” it will do a post request.
 getElement(doc) method takes first div clone in the document.
 ##WebList<T> Component:
 It's a list component with methods such as add/remove(item:T, I?:number), reset(), and length():number that will need to be implemented to create a functional list. addRange(items:T[], I?:number) is already implemented and will use implementation of add() method internally. More methods can be added or creating a constructor if desired to the extending class.
@@ -21,5 +21,4 @@ Switch cases can be assigned based on specific command() with format command[/?]
 * .web.ts elements are hidden elements.
 * a.web are specialized web.ts links - will be excuted asynchronously
 * Server Rendering: Web browser(Async) component or a similar library can be used to render javascript serverside and send it to client as a rendered page.
-
 [Main Page](http://medozs.github.io/web.ts/)

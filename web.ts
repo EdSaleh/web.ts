@@ -72,7 +72,8 @@ module web.ts {
                 if (elm.classList.contains("web")) {
                     elm.onclick = function () {
                         var thelm = <HTMLAnchorElement>this;
-                        if (window.location.pathname + window.location.search + window.location.hash != (thelm.getAttribute("href").charAt(0) != "/" ? "/" : "") + thelm.getAttribute("href")) {
+                        alert(thelm.href);
+                        if (window.location.href != thelm.href) {
                             history.pushState("", document.title, thelm.href);//((thelm.getAttribute("href") + "").charAt(0)!="/"?"/":"")+ thelm.getAttribute("href")
                             main();
                             history.replaceState("", document.title, thelm.href);//((thelm.getAttribute("href") + "").charAt(0) != "/" ? "/" : "") +thelm.getAttribute("href")

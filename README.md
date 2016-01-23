@@ -11,7 +11,7 @@ Download url location document from the Internet and use it in your page.
 This component has one method:-
 result(doc:Document): callback with the document when it’s finished downloading.
 
-Note: If you location's last word after “/” contains a “.” Ex: /file.txt it will do a get request, else or it contains a “?” Or ends with “/” it will do a post request.
+Note: If the location's last word after “/” contains a “.” Ex: /file.txt it will do a get request, else or it contains a “?” Or ends with “/” it will do a post request.
 getElement(doc) method takes first div clone in the document.
 ##WebList<T> Component:
 It's a list component with methods such as add/remove(item:T, I?:number), reset(), and length():number that will need to be implemented to create a functional list. addRange(items:T[], I?:number) is already implemented and will use implementation of add() method internally. More methods can be added or creating a constructor if desired to the extending class.

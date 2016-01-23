@@ -93,7 +93,6 @@ var web;
                     if (elm.classList.contains("web")) {
                         elm.onclick = function () {
                             var thelm = this;
-                            alert(thelm.href);
                             if (window.location.href != thelm.href) {
                                 history.pushState("", document.title, thelm.href); //((thelm.getAttribute("href") + "").charAt(0)!="/"?"/":"")+ thelm.getAttribute("href")
                                 main();

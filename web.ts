@@ -73,9 +73,9 @@ module web.ts {
                     elm.onclick = function () {
                         var thelm = <HTMLAnchorElement>this;
                         if (window.location.href != thelm.href) {
-                            history.pushState("", document.title, thelm.href);//((thelm.getAttribute("href") + "").charAt(0)!="/"?"/":"")+ thelm.getAttribute("href")
+                            history.pushState("", document.title, thelm.href);
                             main();
-                            history.replaceState("", document.title, thelm.href);//((thelm.getAttribute("href") + "").charAt(0) != "/" ? "/" : "") +thelm.getAttribute("href")
+                            history.replaceState("", document.title, thelm.href);
                         } else main();
                         return false;
                     }
@@ -141,7 +141,7 @@ module web.ts {
         protected abstract result(doc: Document): void;//Callback when the template is downloaded and sent for user to render as desired.
         //Loading Function
         private load() {
-            var view: string = window.location.pathname + window.location.search;
+            var view: string = window.location.href.replace("#!/", "").replace("#!", "").replace("#/", "").replace("#", "");
             if (view != null ) {
                 var xhttp = new XMLHttpRequest();
                 xhttp.onload = () => this.result(TextToDocument(xhttp.responseText));

@@ -94,9 +94,9 @@ var web;
                         elm.onclick = function () {
                             var thelm = this;
                             if (window.location.href != thelm.href) {
-                                history.pushState("", document.title, thelm.href); //((thelm.getAttribute("href") + "").charAt(0)!="/"?"/":"")+ thelm.getAttribute("href")
+                                history.pushState("", document.title, thelm.href);
                                 main();
-                                history.replaceState("", document.title, thelm.href); //((thelm.getAttribute("href") + "").charAt(0) != "/" ? "/" : "") +thelm.getAttribute("href")
+                                history.replaceState("", document.title, thelm.href);
                             }
                             else
                                 main();
@@ -168,7 +168,7 @@ var web;
             //Loading Function
             WebDocument.prototype.load = function () {
                 var _this = this;
-                var view = window.location.pathname + window.location.search;
+                var view = window.location.href.replace("#!/", "").replace("#!", "").replace("#/", "").replace("#", "");
                 if (view != null) {
                     var xhttp = new XMLHttpRequest();
                     xhttp.onload = function () { return _this.result(TextToDocument(xhttp.responseText)); };

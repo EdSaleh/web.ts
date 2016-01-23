@@ -73,9 +73,9 @@ module web.ts {
                     elm.onclick = function () {
                         var thelm = <HTMLAnchorElement>this;
                         if (window.location.pathname + window.location.search + window.location.hash != (thelm.getAttribute("href").charAt(0) != "/" ? "/" : "") + thelm.getAttribute("href")) {
-                            history.pushState("", document.title, ((thelm.getAttribute("href") + "").charAt(0)!="/"?"/":"")+ thelm.getAttribute("href"));
+                            history.pushState("", document.title, thelm.href);//((thelm.getAttribute("href") + "").charAt(0)!="/"?"/":"")+ thelm.getAttribute("href")
                             main();
-                            history.replaceState("", document.title, ((thelm.getAttribute("href") + "").charAt(0) != "/" ? "/" : "") +thelm.getAttribute("href"));
+                            history.replaceState("", document.title, thelm.href);//((thelm.getAttribute("href") + "").charAt(0) != "/" ? "/" : "") +thelm.getAttribute("href")
                         } else main();
                         return false;
                     }

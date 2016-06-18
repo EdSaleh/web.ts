@@ -1,7 +1,7 @@
 #web.ts
 Create Web Apps using Object Oriented MVC architecture.
 
-web.ts is designed to make web design better using Object Oriented programing and MVC architecture where is there separation between Views(HTML/CSS) and Controller(.ts classes) in Typescript to create native OO and asynchronous(AJAX) SPA apps. 
+web.ts is a very simple library routing typescript library designed to make web design better. Typescript allows using Object Oriented programming and MVC architecture where is there separation between Views(HTML/CSS) and Controller(.ts classes) in Typescript to create native OO and asynchronous(AJAX) SPA apps. 
 Due to the separation, views can be easily designed using Interactive Web Design softwares such as Visual Studio WebForm Designer, WebDeveloper Tools, or other editors and the Controllers are Typescript classes extending WebDocument, WebList, extending/implementing customized class or none. The library uses TypeScript and easy to learn.
 In Addition to MVC architecture, It transforms Application to an SPA application that works asynchronously. a.web links are designed to call the main(): switch(command()) and arg() of location when clicked, and execute the matched case. It falls back to hash if history is not supported, and will allow the access of the location normally if none are supported. 
 Same-link click and access actions is supported.
